@@ -1,0 +1,36 @@
+// Defense-in-depth for the KidsOS child account: even though the "kid"
+// account is never added to `wheel`, this rule explicitly denies the
+// polkit actions that matter most if that ever changed by mistake
+// (package/OS management, user administration, disk/mount operations).
+// Installed to /usr/share/polkit-1/rules.d/ by the BlueBuild recipe.
+//
+// This is intentionally narrow and explicit rather than a blanket "deny
+// everything for this group" rule, so ordinary desktop actions (opening
+// files, adjusting volume, Bluetooth pairing, etc.) keep working.
+polkit.addRule(function (action, subject) {
+    if (!subject.isInGroup("kidsos-children")) {
+        return polkit.Result.NOT_HANDLED;
+    }
+
+    const restrictedPrefixes = [
+        "org.freedesktop.rpm-ostree.",
+        "org.freedesktop.packagekit.",
+        "org.freedesktop.accounts.user-administration",
+        "org.freedesktop.accounts.change-own-user-data",
+        "org.freedesktop.systemd1.manage-units",
+        "org.freedesktop.systemd1.manage-unit-files",
+        "org.freedesktop.udisks2.filesystem-mount-system",
+        "org.freedesktop.NetworkManager.settings.modify.system",
+        "org.freedesktop.timedate1.set-time",
+        "org.freedesktop.timedate1.set-timezone",
+        "org.freedesktop.hostname1.set-hostname"
+    ];
+
+    for (const prefix of restrictedPrefixes) {
+        if (action.id.indexOf(prefix) === 0) {
+            return polkit.Result.NO;
+        }
+    }
+
+    return polkit.Result.NOT_HANDLED;
+});

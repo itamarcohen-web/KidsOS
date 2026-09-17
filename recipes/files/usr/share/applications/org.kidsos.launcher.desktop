@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=KIDS
+Comment=Your KidsOS home
+Exec=/usr/bin/kidsos-launcher
+Icon=kidsos-launcher
+Terminal=false
+Categories=System;
+NoDisplay=true

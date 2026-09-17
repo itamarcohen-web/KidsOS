@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=KIDS Setup
+Comment=First-time KidsOS setup
+Exec=/usr/bin/kidsos-onboarding
+Icon=kidsos-onboarding
+Terminal=false
+Categories=System;
+NoDisplay=true

@@ -16,6 +16,7 @@ FocusScope {
 
     property string primaryText: LocalizationManager.tr("common.next")
     property bool primaryEnabled: true
+    property bool showPrimary: true
     property string secondaryText: ""
 
     default property alias content: contentArea.children
@@ -34,6 +35,7 @@ FocusScope {
     Component.onCompleted: {
         opacity = 1
         y = 0
+        root.forceActiveFocus()
     }
     Behavior on opacity { NumberAnimation { duration: Theme.durationPage; easing.type: Theme.easingStandard } }
     Behavior on y { NumberAnimation { duration: Theme.durationPage; easing.type: Theme.easingStandard } }
@@ -99,6 +101,7 @@ FocusScope {
         spacing: Theme.spaceMd
 
         KidsButton {
+            visible: root.showPrimary
             anchors.horizontalCenter: parent.horizontalCenter
             text: root.primaryText
             enabled: root.primaryEnabled

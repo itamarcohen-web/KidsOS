@@ -62,7 +62,7 @@ OnboardingPage {
                 delegate: AvatarTile {
                     required property var modelData
                     glyph: modelData.glyph
-                    label: LocalizationManager.tr("onboarding.avatar." + modelData.key)
+                    text: LocalizationManager.tr("onboarding.avatar." + modelData.key)
                     tint: modelData.color
                     selected: page.appState.avatarId === modelData.id
                     onActivated: {

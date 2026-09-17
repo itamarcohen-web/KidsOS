@@ -2,8 +2,10 @@ import QtQuick
 import KidsOS.Theme
 
 // The KIDS wordmark: four letters, four colors, playful rounded display
-// font. This is a brand mark, not translated UI text — it always reads
-// K-I-D-S left-to-right even inside a mirrored RTL layout.
+// font, each with a small "alive" rotation and baseline offset — per the
+// brand reference SVG (see branding/logo/README.md). This is a brand
+// mark, not translated UI text — it always reads K-I-D-S left-to-right
+// even inside a mirrored RTL layout.
 Row {
     id: root
 
@@ -13,14 +15,17 @@ Row {
 
     LayoutMirroring.enabled: false
     LayoutMirroring.childrenInherit: false
-    spacing: variant === "welcome" ? Theme.spaceXs : 1
+    // A little extra breathing room than a plain Row would use, so the
+    // per-letter rotation never lets two letters visually touch.
+    spacing: variant === "welcome" ? Theme.spaceMd : Theme.spaceXs
 
     readonly property int _letterSize: variant === "welcome" ? Theme.sizeDisplay : Theme.sizeH2
+    readonly property real _riseRatio: 5 / 31 // matches the reference SVG's y=76 vs y=71 baselines at font-size 31
     readonly property var _letters: [
-        { ch: "K", color: Theme.logo.k },
-        { ch: "I", color: Theme.logo.i },
-        { ch: "D", color: Theme.logo.d },
-        { ch: "S", color: Theme.logo.s }
+        { ch: "K", color: Theme.logo.k, rot: -6, rise: 0 },
+        { ch: "I", color: Theme.logo.i, rot: 4, rise: 1 },
+        { ch: "D", color: Theme.logo.d, rot: -3, rise: 0 },
+        { ch: "S", color: Theme.logo.s, rot: 6, rise: 1 }
     ]
 
     function playEntrance() {
@@ -43,12 +48,13 @@ Row {
             color: modelData.color
             font.family: Theme.fontDisplay
             font.pixelSize: root._letterSize
-            font.weight: Font.DemiBold
+            font.weight: Theme.fontDisplayWeight
             font.capitalization: Font.AllUppercase
+            rotation: modelData.rot
+            y: modelData.rise > 0 ? -(root._riseRatio * root._letterSize) : 0
 
             opacity: root.animated ? 0 : 1
             scale: root.animated ? 0.4 : 1
-            y: 0
 
             Behavior on opacity {
                 enabled: root.animated

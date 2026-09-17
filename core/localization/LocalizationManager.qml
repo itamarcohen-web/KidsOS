@@ -90,6 +90,11 @@ QtObject {
     }
 
     Component.onCompleted: {
+        // Lets `main.cpp` point this at the source tree for local
+        // development (KIDSOS_DEV_LOCALES_PATH env var) instead of the
+        // installed /usr/share/kidsos/locales/ path.
+        if (typeof KidsOSLocalesPathOverride !== "undefined" && KidsOSLocalesPathOverride.length > 0)
+            localesPath = KidsOSLocalesPathOverride
         _load("en", false) // always keep English as the fallback table
         setLanguage(language)
     }

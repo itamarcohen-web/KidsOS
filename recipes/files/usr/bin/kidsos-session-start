@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+# Decides whether the KidsOS session shows first-boot onboarding or the
+# regular desktop, based on the per-user "onboarding complete" flag that
+# ProfileBridge (apps/onboarding/src/ProfileBridge.cpp) writes on finish.
+set -euo pipefail
+
+FLAG="${HOME}/.config/kidsos/onboarding-complete"
+
+if [[ -f "${FLAG}" ]]; then
+    exec /usr/bin/kidsos-launcher
+else
+    exec /usr/bin/kidsos-onboarding
+fi

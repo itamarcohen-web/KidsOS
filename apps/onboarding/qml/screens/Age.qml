@@ -48,34 +48,35 @@ OnboardingPage {
 
             Repeater {
                 model: page.ages
-                delegate: Rectangle {
+                delegate: Controls.AbstractButton {
+                    id: ageButton
                     required property int modelData
-                    width: 84; height: 84
-                    radius: Theme.radiusLg
                     readonly property bool selected: page.appState.age === modelData
+                    focusPolicy: Qt.StrongFocus
+                    onClicked: page.appState.age = modelData
 
-                    color: selected ? Theme.primary : Theme.surface
-                    border.width: selected ? 0 : 1
-                    border.color: Theme.border
-                    scale: ageArea.pressed ? 0.93 : 1.0
+                    implicitWidth: 84
+                    implicitHeight: 84
 
-                    Behavior on color { ColorAnimation { duration: Theme.durationFast } }
-                    Behavior on scale { NumberAnimation { duration: Theme.durationFast; easing.type: Theme.easingEmphasized } }
+                    background: Rectangle {
+                        radius: Theme.radiusLg
+                        color: ageButton.selected ? Theme.primary : Theme.surface
+                        border.width: ageButton.selected ? 0 : (ageButton.visualFocus ? 2 : 1)
+                        border.color: ageButton.visualFocus && !ageButton.selected ? Theme.primary : Theme.border
+                        scale: ageButton.pressed ? 0.93 : 1.0
 
-                    Text {
-                        anchors.centerIn: parent
-                        text: modelData
+                        Behavior on color { ColorAnimation { duration: Theme.durationFast } }
+                        Behavior on scale { NumberAnimation { duration: Theme.durationFast; easing.type: Theme.easingEmphasized } }
+                    }
+
+                    contentItem: Text {
+                        text: ageButton.modelData
                         font.family: Theme.fontInterface
                         font.pixelSize: Theme.sizeH2
                         font.weight: Font.DemiBold
-                        color: selected ? Theme.textOnPrimary : Theme.textPrimary
-                    }
-
-                    MouseArea {
-                        id: ageArea
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: page.appState.age = modelData
+                        color: ageButton.selected ? Theme.textOnPrimary : Theme.textPrimary
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
                     }
                 }
             }

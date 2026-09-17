@@ -8,3 +8,10 @@ AvatarTile 1.0 AvatarTile.qml
 PinDots 1.0 PinDots.qml
 PinKey 1.0 PinKey.qml
 OnboardingPage 1.0 OnboardingPage.qml
+AppTile 1.0 AppTile.qml
+StatusCluster 1.0 StatusCluster.qml
+Dock 1.0 Dock.qml
+LauncherOverlay 1.0 LauncherOverlay.qml
+SearchOverlay 1.0 SearchOverlay.qml
+NotificationCenter 1.0 NotificationCenter.qml
+QuickSettingsPanel 1.0 QuickSettingsPanel.qml

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=KIDS
+Comment=Starts KidsOS onboarding or the KidsOS desktop
+Exec=/usr/bin/kidsos-session-start
+Icon=kidsos-launcher
+NoDisplay=true
+X-KDE-autostart-phase=1
+OnlyShowIn=KDE;

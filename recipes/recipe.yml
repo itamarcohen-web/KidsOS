@@ -1,0 +1,79 @@
+# KidsOS BlueBuild recipe.
+#
+# Produces a Fedora Kinoite (KDE Plasma) based OCI image with the KidsOS
+# apps, branding and first-boot experience baked in. Build with the
+# official BlueBuild CLI or GitHub Action — see docs/BUILD.md for exact
+# commands; it cannot be built from inside this repository's development
+# sandbox (no container runtime / Fedora build tooling available there).
+name: kidsos
+description: >-
+  KidsOS — a colorful, friendly operating system for kids and teens,
+  built on Fedora Kinoite and KDE Plasma.
+base-image: quay.io/fedora-ostree-desktops/kinoite
+# Bump this to the current stable Fedora release before building —
+# https://fedoraproject.org/releases/
+image-version: "42"
+
+modules:
+  # ---- Stage KidsOS app source into the build container ----
+  # Copied out again at the end of build-kidsos-apps.sh; see that script
+  # for why this doesn't bloat the final rootfs (net-zero diff within one
+  # RUN layer) even though it's a separate COPY layer.
+  - type: files
+    files:
+      - source: apps
+        destination: /tmp/kidsos-src/apps
+      - source: core
+        destination: /tmp/kidsos-src/core
+      - source: branding
+        destination: /tmp/kidsos-src/branding
+      - source: CMakeLists.txt
+        destination: /tmp/kidsos-src/CMakeLists.txt
+
+  # ---- Deploy static system files: systemd units, desktop entries,
+  #      autostart glue, session wrapper, child-account tooling ----
+  - type: files
+    files:
+      - source: recipes/files
+        destination: /
+      - source: core/configuration/scripts/create-child-account.sh
+        destination: /usr/libexec/kidsos/create-child-account.sh
+      - source: core/configuration/polkit/10-kidsos-child-restrictions.rules
+        destination: /usr/share/polkit-1/rules.d/10-kidsos-child-restrictions.rules
+
+  # ---- Compile the KidsOS apps + install branding/fonts ----
+  - type: script
+    scripts:
+      - build-kidsos-apps.sh
+
+  # ---- Runtime packages that back the default app tiles ----
+  - type: rpm-ostree
+    install:
+      - dolphin # Files
+      - kate # Text Editor
+      - kcalc # Calculator
+      - spectacle # Screenshot
+      - gwenview # Photos
+      - elisa # Music
+      - haruna # Video
+      - google-noto-sans-hebrew-fonts
+      - google-noto-sans-arabic-fonts
+      - google-noto-emoji-fonts
+      - google-noto-color-emoji-fonts
+
+  # ---- Browser, via Flatpak (per the KidsOS technical base) ----
+  - type: default-flatpaks
+    notify: true
+    system:
+      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      install:
+        - org.mozilla.firefox
+
+  # ---- Enable the first-boot child-account service ----
+  - type: systemd
+    system:
+      enabled:
+        - kidsos-firstboot.service
+
+  # ---- Sign the resulting image (see docs/BUILD.md for cosign setup) ----
+  - type: signing

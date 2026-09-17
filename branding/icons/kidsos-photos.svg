@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <title>kidsos-photos</title>
+  <rect x="0" y="0" width="128" height="128" rx="32" fill="#E8E8E8"/>
+  <text x="64" y="78" font-family="Rubik, sans-serif" font-size="52" text-anchor="middle">🖼</text>
+  <rect x="44" y="102" width="40" height="6" rx="3" fill="#3D8BFD"/>
+</svg>

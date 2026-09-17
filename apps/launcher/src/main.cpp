@@ -3,26 +3,21 @@
 #include <QQmlContext>
 #include <QIcon>
 
-#include "ProfileBridge.h"
+#include "LauncherBridge.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    app.setApplicationName(QStringLiteral("KidsOS Onboarding"));
+    app.setApplicationName(QStringLiteral("KIDS"));
     app.setOrganizationName(QStringLiteral("KidsOS"));
-    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("kidsos-onboarding")));
+    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("kidsos-launcher")));
 
     QQmlApplicationEngine engine;
 
-    // Shared KidsOS.Theme / KidsOS.Localization / KidsOS.Common modules,
-    // installed under /usr/share/kidsos/qml/KidsOS/…. For local
-    // development without installing, export QML2_IMPORT_PATH (a
-    // colon-separated list Qt reads natively) to point at
-    // branding/themes/qml, core/localization and apps/common/qml — see
-    // docs/BUILD.md.
+    // See apps/onboarding/src/main.cpp for the QML2_IMPORT_PATH note.
     engine.addImportPath(QStringLiteral(KIDSOS_QML_DIR));
 
-    ProfileBridge bridge;
+    LauncherBridge bridge;
     engine.rootContext()->setContextProperty(QStringLiteral("Bridge"), &bridge);
     engine.rootContext()->setContextProperty(
         QStringLiteral("KidsOSLocalesPathOverride"),

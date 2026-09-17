@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 100" width="528" height="400">
+  <title>KIDS</title>
+  <g font-family="Nunito, Arial Rounded MT Bold, Arial, sans-serif" font-weight="900" font-size="31" text-anchor="middle">
+    <text x="39" y="76" fill="#FF5A5F" transform="rotate(-6 39 76)">K</text>
+    <text x="55" y="71" fill="#FFB400" transform="rotate(4 55 71)">I</text>
+    <text x="74" y="76" fill="#00C2A8" transform="rotate(-3 74 76)">D</text>
+    <text x="93" y="71" fill="#3D8BFD" transform="rotate(6 93 71)">S</text>
+  </g>
+</svg>

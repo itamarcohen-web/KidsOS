@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>KidsOS default wallpaper</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EAF1FF"/>
+      <stop offset="1" stop-color="#F6F7FC"/>
+    </linearGradient>
+    <radialGradient id="blobBlue" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#3D8BFD" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#3D8BFD" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blobCoral" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FF5A5F" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FF5A5F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blobMint" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#00C2A8" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#00C2A8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blobAmber" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFB400" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#FFB400" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <circle cx="280" cy="200" r="480" fill="url(#blobBlue)"/>
+  <circle cx="1650" cy="760" r="520" fill="url(#blobCoral)"/>
+  <circle cx="1500" cy="150" r="360" fill="url(#blobMint)"/>
+  <circle cx="420" cy="900" r="420" fill="url(#blobAmber)"/>
+</svg>

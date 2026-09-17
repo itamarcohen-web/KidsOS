@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Settings
+GenericName=KIDS Settings
+Comment=KidsOS settings
+Exec=/usr/bin/kidsos-settings
+Icon=kidsos-settings
+Terminal=false
+Categories=Settings;
