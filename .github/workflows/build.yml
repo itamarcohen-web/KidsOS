@@ -24,5 +24,6 @@ jobs:
         uses: blue-build/github-action@v1
         with:
           recipe_file: recipes/recipe.yml
-    secrets:
-      signing_secret: ${{ secrets.SIGNING_SECRET }}
+          # אם טרם הגדרת מפתח חתימה (cosign) תחת Settings -> Secrets ב-GitHub, 
+          # הסר או שים סולמית (#) בתחילת השורה הבאה:
+          signing_secret: ${{ secrets.SIGNING_SECRET }}
