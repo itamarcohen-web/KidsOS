@@ -17,15 +17,36 @@ jobs:
       packages: write
       id-token: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Build custom image
+      - name: Build and push KidsOS image
         uses: blue-build/github-action@v1
         with:
           recipe: recipes/recipe.yml
           push: true
           registry_username: ${{ github.actor }}
-          registry_token: ${{ secrets.GITHUB_TOKEN }}
+          registry_token: ${{ github.token }}
           maximize_build_space: true
-          cli_args: "--no-sign"
+          # The actual input name is `build_opts` — a previous version of
+          # this workflow used the nonexistent `cli_args`, which was
+          # silently ignored, so every build below tried (and failed) to
+          # sign with no cosign key configured. `--no-sign` here is what
+          # actually reaches the BlueBuild CLI and skips that step. See
+          # docs/BUILD.md for how to switch to real signing later.
+          build_opts: "--no-sign"
+
+      - name: Log in to GHCR (for pulling the image back down to build the ISO)
+        run: echo "${{ github.token }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Generate installable ISO from the pushed image
+        run: |
+          mkdir -p iso-output
+          bluebuild generate-iso image "ghcr.io/${{ github.repository_owner }}/kidsos:latest" \
+            --output-dir ./iso-output \
+            --iso-name kidsos.iso
+
+      - name: Upload ISO as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kidsos-iso
+          path: iso-output/kidsos.iso
+          retention-days: 14
+          if-no-files-found: error

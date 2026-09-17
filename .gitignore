@@ -1,1 +1,9 @@
 /.bluebuild-scripts_*
+.DS_Store
+.claude/
+
+# Never commit the cosign private key. See docs/BUILD.md — the signing
+# key belongs in the SIGNING_SECRET GitHub Actions secret only, never in
+# the repository (a previously committed cosign.key was removed and
+# should be treated as compromised — rotate it before using real signing).
+/cosign.key
