@@ -44,9 +44,14 @@ jobs:
       - name: Generate installable ISO from the pushed image
         run: |
           mkdir -p iso-output
-          bluebuild generate-iso image "ghcr.io/${{ github.repository_owner }}/kidsos:latest" \
+          # --output-dir/--iso-name belong to `generate-iso` itself, not to
+          # the `image` subcommand, so they must come before it — clap
+          # rejects them if they trail the subcommand (exit code 2: hit
+          # this the first time this step ran).
+          bluebuild generate-iso \
             --output-dir ./iso-output \
-            --iso-name kidsos.iso
+            --iso-name kidsos.iso \
+            image "ghcr.io/${{ github.repository_owner }}/kidsos:latest"
 
       - name: Upload ISO as a workflow artifact
         uses: actions/upload-artifact@v4
