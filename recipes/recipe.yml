@@ -62,12 +62,14 @@ modules:
   #      past Fedora 29 in Fedora's repos, so Kids Music ships as the
   #      Flathub build instead ----
   - type: default-flatpaks
-    notify: true
-    system:
-      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      install:
-        - org.mozilla.firefox
-        - org.kde.elisa
+    configurations:
+      - scope: system
+        notify: true
+        repo:
+          url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        install:
+          - org.mozilla.firefox
+          - org.kde.elisa
 
   # ---- Enable the KidsOS services + fapolicyd. Account creation is now
   #      always explicit through onboarding (kidsos-setup session) —
