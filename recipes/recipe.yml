@@ -50,7 +50,6 @@ modules:
       - kcalc # Calculator
       - spectacle # Screenshot
       - gwenview # Photos
-      - elisa # Music
       - haruna # Video
       - qt6-qtsvg # renders branding/*.svg (icons, wallpaper) at runtime
       - fapolicyd # external-application execution allowlisting — docs/TRUST_MODEL.md
@@ -59,13 +58,16 @@ modules:
       - google-noto-emoji-fonts
       - google-noto-color-emoji-fonts
 
-  # ---- Browser, via Flatpak (per the KidsOS technical base) ----
+  # ---- Browser + Music (via Flatpak): Elisa isn't packaged as an RPM
+  #      past Fedora 29 in Fedora's repos, so Kids Music ships as the
+  #      Flathub build instead ----
   - type: default-flatpaks
     notify: true
     system:
       repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
       install:
         - org.mozilla.firefox
+        - org.kde.elisa
 
   # ---- Enable the KidsOS services + fapolicyd. Account creation is now
   #      always explicit through onboarding (kidsos-setup session) —
