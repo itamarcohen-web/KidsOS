@@ -1,0 +1,10 @@
+module KidsOS.Common
+KidsLogo 1.0 KidsLogo.qml
+KidsButton 1.0 KidsButton.qml
+KidsCard 1.0 KidsCard.qml
+ProgressDots 1.0 ProgressDots.qml
+LanguageCard 1.0 LanguageCard.qml
+AvatarTile 1.0 AvatarTile.qml
+PinDots 1.0 PinDots.qml
+PinKey 1.0 PinKey.qml
+OnboardingPage 1.0 OnboardingPage.qml

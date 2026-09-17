@@ -1,0 +1,2 @@
+module KidsOS.Localization
+singleton LocalizationManager 1.0 LocalizationManager.qml

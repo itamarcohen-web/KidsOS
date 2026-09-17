@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "language": "ar",
+    "nativeName": "العربية",
+    "direction": "rtl"
+  },
+  "common": {
+    "back": "رجوع",
+    "next": "التالي",
+    "skip": "تخطّ الآن",
+    "continue": "متابعة"
+  },
+  "onboarding": {
+    "welcome": {
+      "title1": "مرحباً بك في",
+      "title2": "KIDS",
+      "subtitle": "لنجهّز حاسوبك بالطريقة التي تناسبك.",
+      "cta": "ابدأ"
+    },
+    "language": {
+      "title": "اختر لغتك",
+      "subtitle": "يمكنك تغيير هذا في أي وقت من الإعدادات.",
+      "english": "English",
+      "hebrew": "עברית",
+      "arabic": "العربية"
+    },
+    "name": {
+      "title": "ما اسمك؟",
+      "placeholder": "اكتب اسمك",
+      "greeting": "مرحباً، %1!",
+      "greetingEmpty": "مرحباً!"
+    },
+    "avatar": {
+      "title": "اختر الصورة الرمزية",
+      "subtitle": "يمكنك تغييرها لاحقاً أيضاً.",
+      "robot": "روبوت",
+      "cat": "قطة",
+      "dog": "كلب",
+      "astronaut": "رائد فضاء",
+      "football": "كرة قدم",
+      "music": "موسيقى",
+      "gaming": "ألعاب",
+      "space": "فضاء",
+      "art": "فن",
+      "nature": "طبيعة"
+    },
+    "age": {
+      "title": "كم عمرك؟",
+      "subtitle": "هذا يساعدنا على تجهيز كل شيء بالشكل المناسب لك."
+    },
+    "parent": {
+      "title": "ربط أحد الوالدين",
+      "subtitle": "اطلب من أحد والديك مسح رمز QR.",
+      "pairingCodeLabel": "أو أدخل هذا الرمز",
+      "waiting": "بانتظار اتصال أحد الوالدين…",
+      "connected": "تم الاتصال! كل شيء جاهز.",
+      "skip": "سأفعل هذا لاحقاً"
+    },
+    "pin": {
+      "title": "أنشئ رمز PIN",
+      "subtitle": "اختر 4 أرقام يعرفها أنت فقط.",
+      "confirmTitle": "أكّد رمز PIN",
+      "confirmSubtitle": "أدخله مرة أخرى.",
+      "mismatch": "الرمزان غير متطابقين — لنحاول مرة أخرى."
+    },
+    "finish": {
+      "title": "كل شيء جاهز!",
+      "subtitle": "حاسوبك جاهز.",
+      "cta": "الدخول إلى KIDS"
+    }
+  },
+  "desktop": {
+    "greeting": "مرحباً، %1",
+    "greetingEmpty": "مرحباً!",
+    "search": {
+      "placeholder": "ابحث عن تطبيقات وألعاب والمزيد"
+    },
+    "nav": {
+      "apps": "التطبيقات",
+      "search": "بحث",
+      "notifications": "الإشعارات"
+    },
+    "notifications": {
+      "empty": "لا توجد إشعارات جديدة!"
+    },
+    "wifi": {
+      "connected": "واي فاي متصل",
+      "disconnected": "لا يوجد واي فاي"
+    },
+    "apps": {
+      "launcher": "KIDS",
+      "browser": "المتصفح",
+      "store": "متجر Kids",
+      "games": "ألعاب",
+      "school": "المدرسة",
+      "music": "موسيقى",
+      "files": "الملفات",
+      "calculator": "الآلة الحاسبة",
+      "textEditor": "محرر النصوص",
+      "screenshot": "لقطة شاشة",
+      "video": "فيديو",
+      "photos": "الصور",
+      "settings": "الإعدادات",
+      "help": "مساعدة",
+      "updates": "تحديثات KidsOS"
+    },
+    "store": {
+      "comingSoonTitle": "متجر Kids قادم قريباً!",
+      "comingSoonBody": "قريباً ستتمكن من اكتشاف تطبيقات وألعاب جديدة هنا، مختارة خصيصاً لك."
+    }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "sections": {
+      "profile": "الملف الشخصي",
+      "language": "اللغة",
+      "display": "العرض وإمكانية الوصول",
+      "sound": "الصوت",
+      "about": "حول KIDS"
+    }
+  }
+}

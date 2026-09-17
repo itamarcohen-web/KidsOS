@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "language": "en",
+    "nativeName": "English",
+    "direction": "ltr"
+  },
+  "common": {
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip for now",
+    "continue": "Continue"
+  },
+  "onboarding": {
+    "welcome": {
+      "title1": "Welcome to",
+      "title2": "KIDS",
+      "subtitle": "Let's make your computer yours.",
+      "cta": "Get started"
+    },
+    "language": {
+      "title": "Choose your language",
+      "subtitle": "You can change this any time in Settings.",
+      "english": "English",
+      "hebrew": "עברית",
+      "arabic": "العربية"
+    },
+    "name": {
+      "title": "What's your name?",
+      "placeholder": "Type your name",
+      "greeting": "Hi, %1!",
+      "greetingEmpty": "Hi there!"
+    },
+    "avatar": {
+      "title": "Pick your avatar",
+      "subtitle": "You can change it later too.",
+      "robot": "Robot",
+      "cat": "Cat",
+      "dog": "Dog",
+      "astronaut": "Astronaut",
+      "football": "Football",
+      "music": "Music",
+      "gaming": "Gaming",
+      "space": "Space",
+      "art": "Art",
+      "nature": "Nature"
+    },
+    "age": {
+      "title": "How old are you?",
+      "subtitle": "This helps us set things up just right."
+    },
+    "parent": {
+      "title": "Connect a parent",
+      "subtitle": "Ask your parent to scan the QR code.",
+      "pairingCodeLabel": "Or enter this code",
+      "waiting": "Waiting for a parent to connect…",
+      "connected": "Connected! You're all set.",
+      "skip": "Set this up later"
+    },
+    "pin": {
+      "title": "Create your PIN",
+      "subtitle": "Choose 4 numbers only you know.",
+      "confirmTitle": "Confirm your PIN",
+      "confirmSubtitle": "Enter it one more time.",
+      "mismatch": "Those don't match — let's try again."
+    },
+    "finish": {
+      "title": "You're all set!",
+      "subtitle": "Your KIDS computer is ready.",
+      "cta": "Enter KIDS"
+    }
+  },
+  "desktop": {
+    "greeting": "Hello, %1",
+    "greetingEmpty": "Hello!",
+    "search": {
+      "placeholder": "Search apps, games and more"
+    },
+    "nav": {
+      "apps": "Apps",
+      "search": "Search",
+      "notifications": "Notifications"
+    },
+    "notifications": {
+      "empty": "You're all caught up!"
+    },
+    "wifi": {
+      "connected": "Wi-Fi connected",
+      "disconnected": "No Wi-Fi"
+    },
+    "apps": {
+      "launcher": "KIDS",
+      "browser": "Browser",
+      "store": "Kids Store",
+      "games": "Games",
+      "school": "School",
+      "music": "Music",
+      "files": "Files",
+      "calculator": "Calculator",
+      "textEditor": "Text Editor",
+      "screenshot": "Screenshot",
+      "video": "Video",
+      "photos": "Photos",
+      "settings": "Settings",
+      "help": "Help",
+      "updates": "KidsOS Updates"
+    },
+    "store": {
+      "comingSoonTitle": "Kids Store is on its way!",
+      "comingSoonBody": "Soon you'll be able to discover new apps and games here, picked just for you."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "sections": {
+      "profile": "Profile",
+      "language": "Language",
+      "display": "Display & Accessibility",
+      "sound": "Sound",
+      "about": "About KIDS"
+    }
+  }
+}

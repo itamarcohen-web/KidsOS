@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "language": "he",
+    "nativeName": "עברית",
+    "direction": "rtl"
+  },
+  "common": {
+    "back": "חזרה",
+    "next": "הבא",
+    "skip": "דלג לעכשיו",
+    "continue": "המשך"
+  },
+  "onboarding": {
+    "welcome": {
+      "title1": "ברוכים הבאים ל־",
+      "title2": "KIDS",
+      "subtitle": "בואו נתאים את המחשב בדיוק בשבילך.",
+      "cta": "התחלה"
+    },
+    "language": {
+      "title": "בחרו את השפה שלכם",
+      "subtitle": "אפשר לשנות את זה בכל זמן בהגדרות.",
+      "english": "English",
+      "hebrew": "עברית",
+      "arabic": "العربية"
+    },
+    "name": {
+      "title": "מה השם שלך?",
+      "placeholder": "הקלידו את השם שלכם",
+      "greeting": "היי, %1!",
+      "greetingEmpty": "היי!"
+    },
+    "avatar": {
+      "title": "בחרו אווטאר",
+      "subtitle": "אפשר לשנות גם מאוחר יותר.",
+      "robot": "רובוט",
+      "cat": "חתול",
+      "dog": "כלב",
+      "astronaut": "אסטרונאוט",
+      "football": "כדורגל",
+      "music": "מוזיקה",
+      "gaming": "גיימינג",
+      "space": "חלל",
+      "art": "אמנות",
+      "nature": "טבע"
+    },
+    "age": {
+      "title": "בן/בת כמה את/ה?",
+      "subtitle": "זה עוזר לנו להתאים הכול בדיוק בשבילך."
+    },
+    "parent": {
+      "title": "חיבור להורה",
+      "subtitle": "צריך מההורה לסרוק את קוד ה־QR.",
+      "pairingCodeLabel": "או להזין את הקוד הזה",
+      "waiting": "ממתינים שהורה יתחבר…",
+      "connected": "מחובר! הכול מוכן.",
+      "skip": "נעשה את זה מאוחר יותר"
+    },
+    "pin": {
+      "title": "צרו קוד PIN",
+      "subtitle": "בחרו 4 מספרים שרק אתם יודעים.",
+      "confirmTitle": "אשרו את קוד ה-PIN",
+      "confirmSubtitle": "הקלידו אותו שוב.",
+      "mismatch": "אלה לא תואמים — בואו ננסה שוב."
+    },
+    "finish": {
+      "title": "הכול מוכן!",
+      "subtitle": "המחשב שלך מוכן.",
+      "cta": "כניסה ל־KIDS"
+    }
+  },
+  "desktop": {
+    "greeting": "שלום, %1",
+    "greetingEmpty": "שלום!",
+    "search": {
+      "placeholder": "חיפוש אפליקציות, משחקים ועוד"
+    },
+    "nav": {
+      "apps": "אפליקציות",
+      "search": "חיפוש",
+      "notifications": "התראות"
+    },
+    "notifications": {
+      "empty": "הכול מעודכן!"
+    },
+    "wifi": {
+      "connected": "Wi-Fi מחובר",
+      "disconnected": "אין Wi-Fi"
+    },
+    "apps": {
+      "launcher": "KIDS",
+      "browser": "דפדפן",
+      "store": "חנות קידס",
+      "games": "משחקים",
+      "school": "בית ספר",
+      "music": "מוזיקה",
+      "files": "קבצים",
+      "calculator": "מחשבון",
+      "textEditor": "עורך טקסט",
+      "screenshot": "צילום מסך",
+      "video": "וידאו",
+      "photos": "תמונות",
+      "settings": "הגדרות",
+      "help": "עזרה",
+      "updates": "עדכוני KidsOS"
+    },
+    "store": {
+      "comingSoonTitle": "חנות קידס בדרך אליכם!",
+      "comingSoonBody": "בקרוב תוכלו לגלות כאן אפליקציות ומשחקים חדשים, שנבחרו במיוחד בשבילכם."
+    }
+  },
+  "settings": {
+    "title": "הגדרות",
+    "sections": {
+      "profile": "פרופיל",
+      "language": "שפה",
+      "display": "תצוגה ונגישות",
+      "sound": "צליל",
+      "about": "אודות KIDS"
+    }
+  }
+}
