@@ -16,6 +16,8 @@ jobs:
       contents: read
       packages: write
       id-token: write
+    env:
+      DISABLE_COSIGN: "true"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,4 +26,3 @@ jobs:
         uses: blue-build/github-action@v1
         with:
           recipe_file: recipes/recipe.yml
-          args: --no-sign
