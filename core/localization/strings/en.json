@@ -29,7 +29,9 @@
       "title": "What's your name?",
       "placeholder": "Type your name",
       "greeting": "Hi, %1!",
-      "greetingEmpty": "Hi there!"
+      "greetingEmpty": "Hi there!",
+      "childIntro": "Now let's set up your child's space",
+      "usernamePlaceholder": "Username"
     },
     "avatar": {
       "title": "Pick your avatar",
@@ -62,12 +64,27 @@
       "subtitle": "Choose 4 numbers only you know.",
       "confirmTitle": "Confirm your PIN",
       "confirmSubtitle": "Enter it one more time.",
-      "mismatch": "Those don't match — let's try again."
+      "mismatch": "Those don't match — let's try again.",
+      "accountError": "Something went wrong creating the account. Let's try again."
     },
     "finish": {
       "title": "You're all set!",
       "subtitle": "Your KIDS computer is ready.",
       "cta": "Enter KIDS"
+    },
+    "parentAccount": {
+      "title": "Let's set up the parent account",
+      "subtitle": "This account has full control of this computer.",
+      "namePlaceholder": "Your name",
+      "usernamePlaceholder": "Username"
+    },
+    "parentPassword": {
+      "title": "Create a password",
+      "subtitle": "This is your real login password — keep it safe.",
+      "placeholder": "Password",
+      "confirmPlaceholder": "Confirm password",
+      "creating": "Creating account…",
+      "error": "Something went wrong. Try a different username."
     }
   },
   "desktop": {
@@ -206,6 +223,53 @@
     },
     "accessibility": {
       "reduceMotion": "Reduce motion"
+    },
+    "managedByParent": "This setting is managed by your parent."
+  },
+  "login": {
+    "whoIsUsing": "Who's using KIDS?",
+    "welcomeBack": "Welcome back, %1",
+    "wrongPin": "That PIN doesn't look right.",
+    "wrongPassword": "That password doesn't look right."
+  },
+  "approvals": {
+    "title": "App Requests",
+    "tab": {
+      "pending": "Pending",
+      "trusted": "Trusted Apps"
+    },
+    "requestedBy": "Requested by %1",
+    "externalSource": "Downloaded file",
+    "storeSource": "Kids Store",
+    "approve": "Approve",
+    "deny": "Deny",
+    "revoke": "Revoke",
+    "approved": "Approved",
+    "noPending": "No requests right now.",
+    "noTrusted": "No trusted external apps yet."
+  },
+  "parentMode": {
+    "label": "Parent Mode"
+  },
+  "fileGuard": {
+    "title": "Parent approval required",
+    "body": "“%1” was downloaded outside Kids Store. Ask your parent to approve it before you can open it.",
+    "sentTitle": "Request sent!",
+    "sentBody": "Ask your parent to approve it in App Requests.",
+    "askParent": "Ask parent"
+  },
+  "dock": {
+    "switchUser": "Switch user"
+  },
+  "store": {
+    "demoPermissions": "Needs: Internet, Files",
+    "requestInstall": "Request install",
+    "status": {
+      "pending": "Waiting for your parent to approve…",
+      "approved": "Approved! Ask your parent to finish setting it up.",
+      "denied": "Your parent said not this time.",
+      "installed": "Installed!",
+      "failed": "Something went wrong. Try again later."
     }
   }
 }

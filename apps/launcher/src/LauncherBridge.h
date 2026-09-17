@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QVariantList>
 #include <QVariantMap>
 
 // Bridges the KidsOS home screen to the rest of the system: launching real
@@ -27,6 +28,18 @@ public:
 
     // Persists "light" | "dark" | "system" so it survives a restart.
     Q_INVOKABLE void saveAppearanceMode(const QString &mode);
+
+    // Locks this session and starts a fresh SDDM greeter (spec §11) —
+    // selecting Parent there always requires real authentication; there
+    // is no "already logged in" shortcut. See docs/ACCOUNTS_AND_LOGIN.md.
+    Q_INVOKABLE bool switchUser();
+
+    // App-request/approval backend (spec §15) — thin passthroughs to
+    // org.kidsos.Installer1, exposed here so the Kids Store UI doesn't
+    // need its own D-Bus wiring.
+    Q_INVOKABLE QString submitInstallRequest(const QString &appId, const QString &appName,
+                                              const QStringList &permissions);
+    Q_INVOKABLE QVariantList myInstallRequests();
 
 private:
     QVariantMap m_profile;

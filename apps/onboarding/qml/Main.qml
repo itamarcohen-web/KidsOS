@@ -20,22 +20,33 @@ Window {
     // self-contained and easy to reason about.
     QtObject {
         id: appState
+        property string language: "en"
+
+        // Parent account draft (spec §2-4). The password is held only
+        // in memory for the few seconds between the password screen and
+        // the CreateParentAccount D-Bus call, then screens should not
+        // read it back — see screens/ParentPassword.qml.
+        property string parentName: ""
+        property string parentUsername: ""
+
+        // Child profile draft (spec §5-6).
         property string name: ""
+        property string username: ""
         property string avatarId: ""
         property string avatarGlyph: ""
         property int age: 0
-        property string pinDraft: ""
-        property string language: "en"
     }
 
     readonly property var screenUrls: [
         "screens/Welcome.qml",
         "screens/Language.qml",
+        "screens/ParentAccount.qml",
+        "screens/ParentPassword.qml",
         "screens/Name.qml",
         "screens/Avatar.qml",
         "screens/Age.qml",
-        "screens/ParentConnect.qml",
         "screens/PinSetup.qml",
+        "screens/ParentConnect.qml",
         "screens/Finish.qml"
     ]
 
@@ -51,7 +62,8 @@ Window {
                 return
             stack.push(Qt.resolvedUrl(window.screenUrls[index]), {
                 "appState": appState,
-                "stepIndex": index
+                "stepIndex": index,
+                "stepCount": window.screenUrls.length
             })
         }
 

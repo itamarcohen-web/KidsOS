@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>KidsOS</vendor>
+
+  <action id="org.kidsos.auth.create-account">
+    <description>Create a KidsOS family account</description>
+    <description xml:lang="he">יצירת חשבון משפחה ב-KidsOS</description>
+    <description xml:lang="ar">إنشاء حساب عائلي في KidsOS</description>
+    <message>A parent password is required to create a new account</message>
+    <message xml:lang="he">נדרשת סיסמת הורה כדי ליצור חשבון חדש</message>
+    <message xml:lang="ar">مطلوبة كلمة مرور الوالد لإنشاء حساب جديد</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.kidsos.auth.manage-child">
+    <description>Change a child's KidsOS profile</description>
+    <description xml:lang="he">שינוי פרופיל הילד ב-KidsOS</description>
+    <description xml:lang="ar">تغيير ملف الطفل الشخصي في KidsOS</description>
+    <message>A parent password is required to change your child's PIN or profile</message>
+    <message xml:lang="he">נדרשת סיסמת הורה כדי לשנות את קוד ה-PIN או הפרופיל של הילד</message>
+    <message xml:lang="ar">مطلوبة كلمة مرور الوالد لتغيير رمز PIN أو الملف الشخصي للطفل</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+  </action>
+</policyconfig>

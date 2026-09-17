@@ -11,8 +11,14 @@ OnboardingPage {
     showProgress: false
     primaryText: LocalizationManager.tr("onboarding.finish.cta")
     onPrimaryActivated: {
-        Bridge.saveDraft(page.appState.name, page.appState.avatarId, page.appState.age, page.appState.language)
-        Bridge.completeOnboarding()
+        // Disables the kidsos-setup autologin (see AuthService::
+        // MarkFirstBootComplete) — quitting then ends this app, which
+        // is the entire kidsos-setup X session's content
+        // (recipes/files/usr/share/xsessions/kidsos-setup.desktop), so
+        // the session ends and SDDM shows the real KidsOS login screen
+        // with the two accounts just created. See
+        // docs/ACCOUNTS_AND_LOGIN.md.
+        Bridge.markFirstBootComplete()
         Qt.quit()
     }
 

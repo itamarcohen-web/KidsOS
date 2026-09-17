@@ -135,6 +135,7 @@ Window {
             readonly property var current: window.categories.find(function (c) { return c.id === window.activeCategory }) || {}
             glyph: current.glyph || "⚙"
             title: LocalizationManager.tr("settings.categories." + window.activeCategory)
+            settingId: window.activeCategory
         }
     }
 }

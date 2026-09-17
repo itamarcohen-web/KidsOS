@@ -22,7 +22,7 @@ on:
 
 jobs:
   build:
-    uses: blue-build/github-workflow-templates/.github/workflows/reusable-build.yml@v1
+    uses: blue-build/github-workflow-templates/.github/workflows/build.yml@v1
     with:
       recipe: recipe.yml
       recipe_dir: recipes

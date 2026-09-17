@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=App Requests
+Comment=Review and approve KidsOS app requests
+Exec=/usr/bin/kidsos-approvals
+Icon=kidsos-approvals
+Terminal=false
+Categories=System;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>KidsOS</vendor>
+
+  <action id="org.kidsos.policy.manage">
+    <description>Change KidsOS parental policy</description>
+    <description xml:lang="he">שינוי מדיניות ההורות של KidsOS</description>
+    <description xml:lang="ar">تغيير سياسة الرقابة الأبوية في KidsOS</description>
+    <message>A parent password is required to change this policy</message>
+    <message xml:lang="he">נדרשת סיסמת הורה כדי לשנות הגדרה זו</message>
+    <message xml:lang="ar">مطلوبة كلمة مرور الوالد لتغيير هذا الإعداد</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+  </action>
+</policyconfig>

@@ -1,7 +1,7 @@
 qt_add_executable(kidsos-onboarding
     src/main.cpp
-    src/ProfileBridge.h
-    src/ProfileBridge.cpp
+    src/OnboardingBridge.h
+    src/OnboardingBridge.cpp
 )
 
 target_compile_definitions(kidsos-onboarding PRIVATE
@@ -15,6 +15,7 @@ target_link_libraries(kidsos-onboarding PRIVATE
     Qt6::Qml
     Qt6::Quick
     Qt6::QuickControls2
+    Qt6::DBus
 )
 
 install(TARGETS kidsos-onboarding DESTINATION ${CMAKE_INSTALL_BINDIR})

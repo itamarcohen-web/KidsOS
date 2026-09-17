@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=KidsOS
+Description=KidsOS family login screen
+Author=KidsOS
+Copyright=(c) 2026, KidsOS
+License=MIT
+Type=sddm
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations

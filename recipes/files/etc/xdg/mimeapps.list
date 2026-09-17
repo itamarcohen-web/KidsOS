@@ -1,0 +1,13 @@
+# System-wide default handlers. Executable-ish MIME types default to
+# KidsOS's approval prompt (spec §17) instead of the file manager's
+# usual "run" action — see docs/TRUST_MODEL.md for why this is a
+# convenience layer and not the actual enforcement (fapolicyd is).
+[Default Applications]
+application/x-executable=org.kidsos.file-guard-prompt.desktop
+application/x-sharedlib=org.kidsos.file-guard-prompt.desktop
+application/x-elf=org.kidsos.file-guard-prompt.desktop
+text/x-shellscript=org.kidsos.file-guard-prompt.desktop
+application/vnd.appimage=org.kidsos.file-guard-prompt.desktop
+application/x-iso9660-appimage=org.kidsos.file-guard-prompt.desktop
+application/x-debian-package=org.kidsos.file-guard-prompt.desktop
+application/x-rpm=org.kidsos.file-guard-prompt.desktop

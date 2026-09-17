@@ -1,21 +1,21 @@
 # KidsOS BlueBuild recipe.
 #
 # Produces a Fedora Kinoite (KDE Plasma) based OCI image with the KidsOS
-# apps, branding and first-boot experience baked in. Build with the
-# official BlueBuild CLI or GitHub Action — see docs/BUILD.md for exact
-# commands; it cannot be built from inside this repository's development
-# sandbox (no container runtime / Fedora build tooling available there).
+# apps, branding, family account/permission system, and first-boot
+# experience baked in. Build with the official BlueBuild CLI or GitHub
+# Action — see docs/BUILD.md for exact commands; it cannot be built from
+# inside this repository's development sandbox (no container runtime /
+# Fedora build tooling available there).
 name: kidsos
 description: >-
   KidsOS — a colorful, friendly operating system for kids and teens,
-  built on Fedora Kinoite and KDE Plasma.
+  built on Fedora Kinoite and KDE Plasma, with a real Parent/Child
+  account and permission system.
 base-image: quay.io/fedora-ostree-desktops/kinoite
-# Bump this to the current stable Fedora release before building —
-# https://fedoraproject.org/releases/
-image-version: "42"
+image-version: "41"
 
 modules:
-  # ---- Stage KidsOS app source into the build container ----
+  # ---- Stage KidsOS app/service source into the build container ----
   # Copied out again at the end of build-kidsos-apps.sh; see that script
   # for why this doesn't bloat the final rootfs (net-zero diff within one
   # RUN layer) even though it's a separate COPY layer.
@@ -31,22 +31,29 @@ modules:
         destination: /tmp/kidsos-src/CMakeLists.txt
 
   # ---- Deploy static system files: systemd units, desktop entries,
-  #      autostart glue, session wrapper, child-account tooling ----
+  #      autostart glue, session wrapper, SDDM/xsession config ----
   - type: files
     files:
       - source: recipes/files
         destination: /
-      - source: core/configuration/scripts/create-child-account.sh
-        destination: /usr/libexec/kidsos/create-child-account.sh
       - source: core/configuration/polkit/10-kidsos-child-restrictions.rules
         destination: /usr/share/polkit-1/rules.d/10-kidsos-child-restrictions.rules
+      - source: core/configuration/polkit/actions
+        destination: /usr/share/polkit-1/actions
+      - source: core/configuration/dbus-1/system.d
+        destination: /usr/share/dbus-1/system.d
+      - source: core/configuration/fapolicyd/35-kidsos-children.rules
+        destination: /etc/fapolicyd/rules.d/35-kidsos-children.rules
 
-  # ---- Compile the KidsOS apps + install branding/fonts ----
+  # ---- Compile the KidsOS apps + kidsos-* services, install
+  #      branding/fonts/SDDM theme, provision users/dirs (see that
+  #      script — this is the bulk of the family account system's
+  #      system-level setup) ----
   - type: script
     scripts:
       - build-kidsos-apps.sh
 
-  # ---- Runtime packages that back the default app tiles ----
+  # ---- Runtime packages ----
   - type: rpm-ostree
     install:
       - dolphin # underlies Kids Files
@@ -57,6 +64,7 @@ modules:
       - elisa # Music
       - haruna # Video
       - qt6-qtsvg # renders branding/*.svg (icons, wallpaper) at runtime
+      - fapolicyd # external-application execution allowlisting — docs/TRUST_MODEL.md
       - google-noto-sans-hebrew-fonts
       - google-noto-sans-arabic-fonts
       - google-noto-emoji-fonts
@@ -70,11 +78,18 @@ modules:
       install:
         - org.mozilla.firefox
 
-  # ---- Enable the first-boot child-account service ----
+  # ---- Enable the KidsOS services + fapolicyd. Account creation is now
+  #      always explicit through onboarding (kidsos-setup session) —
+  #      see docs/ACCOUNTS_AND_LOGIN.md — so there is no more
+  #      no-UI firstboot unit like milestone 1 had. ----
   - type: systemd
     system:
       enabled:
-        - kidsos-firstboot.service
+        - fapolicyd.service
+        - kidsos-auth.service
+        - kidsos-policy.service
+        - kidsos-file-guard.service
+        - kidsos-installer.service
 
   # ---- Sign the resulting image (see docs/BUILD.md for cosign setup) ----
   - type: signing

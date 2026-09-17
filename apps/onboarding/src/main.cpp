@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QIcon>
 
-#include "ProfileBridge.h"
+#include "OnboardingBridge.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     // docs/BUILD.md.
     engine.addImportPath(QStringLiteral(KIDSOS_QML_DIR));
 
-    ProfileBridge bridge;
+    OnboardingBridge bridge;
     engine.rootContext()->setContextProperty(QStringLiteral("Bridge"), &bridge);
     engine.rootContext()->setContextProperty(
         QStringLiteral("KidsOSLocalesPathOverride"),

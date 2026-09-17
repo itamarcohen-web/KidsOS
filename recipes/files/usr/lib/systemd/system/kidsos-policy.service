@@ -1,0 +1,22 @@
+[Unit]
+Description=KidsOS policy decision service (org.kidsos.Policy1)
+Documentation=man:kidsos-policy(8)
+After=dbus.service
+Requires=dbus.service
+
+[Service]
+Type=dbus
+BusName=org.kidsos.Policy1
+ExecStart=/usr/libexec/kidsos/kidsos-policy
+Restart=on-failure
+# Unprivileged on purpose: this service only ever reads its own state
+# file or asks polkit before writing it — see
+# docs/SECURITY_ARCHITECTURE.md.
+User=kidsos-service
+Group=kidsos-service
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/etc/kidsos
+
+[Install]
+WantedBy=multi-user.target

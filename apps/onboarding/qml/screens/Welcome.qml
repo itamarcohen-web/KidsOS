@@ -8,6 +8,7 @@ Item {
     id: root
     required property QtObject appState
     required property int stepIndex
+    property int stepCount: 0 // unused on this screen (no progress dots) — see Main.qml's goToStep
 
     Rectangle { anchors.fill: parent; color: Theme.background }
 

@@ -1,0 +1,20 @@
+[Unit]
+Description=KidsOS account & session service (org.kidsos.Auth1)
+Documentation=man:kidsos-auth(8)
+After=dbus.service
+Requires=dbus.service
+
+[Service]
+Type=dbus
+BusName=org.kidsos.Auth1
+ExecStart=/usr/libexec/kidsos/kidsos-auth
+Restart=on-failure
+# Root is required: it calls useradd/chpasswd. See
+# docs/SECURITY_ARCHITECTURE.md for why this service (and not the GUI)
+# holds that privilege.
+User=root
+NoNewPrivileges=false
+ProtectSystem=false
+
+[Install]
+WantedBy=multi-user.target

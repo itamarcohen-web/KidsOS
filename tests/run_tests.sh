@@ -17,4 +17,12 @@ echo "== brand color tokens =="
 python3 tests/validate_brand_colors.py
 
 echo
+echo "== D-Bus / polkit consistency =="
+python3 tests/validate_dbus_consistency.py
+
+echo
+echo "== trust model invariants =="
+python3 tests/validate_trust_model_invariants.py
+
+echo
 echo "All static checks passed."

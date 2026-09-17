@@ -27,8 +27,10 @@ OnboardingPage {
     }
 
     property bool confirming: false
+    property bool submitting: false
     property string firstPin: ""
     property string currentEntry: ""
+    property string errorText: ""
 
     function digitPressed(d) {
         if (currentEntry.length >= 4)
@@ -50,17 +52,30 @@ OnboardingPage {
     }
 
     function evaluateEntry() {
+        page.errorText = ""
         if (!confirming) {
             firstPin = currentEntry
             currentEntry = ""
             confirming = true
+        } else if (currentEntry !== firstPin) {
+            pinDots.shake = true
+            currentEntry = ""
+            confirming = false
+            firstPin = ""
         } else {
-            if (currentEntry === firstPin) {
-                page.appState.pinDraft = firstPin
-                Bridge.setChildPin(firstPin)
+            // All child profile fields (name/username/avatar/age) were
+            // collected on the previous three screens; this is where
+            // they, plus the PIN just confirmed, actually create the
+            // real Linux child account via kidsos-auth — see
+            // docs/ACCOUNTS_AND_LOGIN.md.
+            page.submitting = true
+            const ok = Bridge.createChildAccount(page.appState.name, page.appState.username,
+                                                  firstPin, page.appState.avatarId, page.appState.age)
+            page.submitting = false
+            if (ok) {
                 Controls.StackView.view.goToStep(page.stepIndex + 1)
             } else {
-                pinDots.shake = true
+                page.errorText = LocalizationManager.tr("onboarding.pin.accountError")
                 currentEntry = ""
                 confirming = false
                 firstPin = ""
@@ -130,6 +145,15 @@ OnboardingPage {
                 isAction: true
                 onActivated: page.backspace()
             }
+        }
+
+        Text {
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: page.errorText.length > 0
+            text: page.errorText
+            color: Theme.error
+            font.family: Theme.fontInterface
+            font.pixelSize: Theme.sizeCaption
         }
     }
 }

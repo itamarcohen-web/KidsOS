@@ -1,0 +1,21 @@
+[Unit]
+Description=KidsOS privileged installation workflow (org.kidsos.Installer1)
+Documentation=man:kidsos-installer(8)
+After=dbus.service kidsos-file-guard.service
+Requires=dbus.service
+Wants=kidsos-file-guard.service
+
+[Service]
+Type=dbus
+BusName=org.kidsos.Installer1
+ExecStart=/usr/libexec/kidsos/kidsos-installer
+Restart=on-failure
+# Root is required: approved requests trigger real package installs
+# (dnf/rpm) and calls into kidsos-file-guard. Every mutating method is
+# still polkit-gated — see docs/SECURITY_ARCHITECTURE.md.
+User=root
+NoNewPrivileges=false
+ProtectSystem=false
+
+[Install]
+WantedBy=multi-user.target

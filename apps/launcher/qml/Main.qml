@@ -81,6 +81,10 @@ Window {
     readonly property int unreadCount: notifications.filter(function (n) { return !n.read }).length
 
     function launch(app) {
+        if (app.id === "store") {
+            storeDialog.open()
+            return
+        }
         if (app.placeholder) {
             comingSoon.open()
             return
@@ -198,6 +202,7 @@ Window {
         onSearchRequested: searchOverlay.open = true
         onNotificationsRequested: notificationCenter.open = true
         onQuickSettingsRequested: quickSettings.open = true
+        onSwitchUserRequested: Bridge.switchUser()
         onPinnedAppActivated: function (app) { window.launch(app) }
     }
 
@@ -240,7 +245,104 @@ Window {
         onCloseRequested: quickSettings.open = false
     }
 
-    // ---- "Coming soon" placeholder dialog (Kids Store, Games, School, Help, KidsOS Updates) ----
+    // ---- Kids Store demo: request-install flow (spec §15) ----
+    // Kids Store has no real catalog yet (see docs/ROADMAP.md), so this
+    // shows one example app to exercise the real InstallRequest backend
+    // end to end — kidsos-installer, not a mock.
+    Rectangle {
+        id: storeDialog
+        anchors.fill: parent
+        color: Theme.overlay
+        visible: opacity > 0
+        opacity: 0
+
+        readonly property string demoAppId: "demo.minecraft"
+        property var myRequest: null
+
+        function refreshRequest() {
+            var requests = Bridge.myInstallRequests()
+            var found = null
+            for (var i = 0; i < requests.length; i++) {
+                if (requests[i].app_id === storeDialog.demoAppId)
+                    found = requests[i]
+            }
+            storeDialog.myRequest = found
+        }
+
+        function open() { storeDialog.refreshRequest(); opacity = 1 }
+        function close() { opacity = 0 }
+        function request() {
+            Bridge.submitInstallRequest(demoAppId, "Minecraft", ["internet", "files"])
+            storeDialog.refreshRequest()
+        }
+
+        Behavior on opacity { NumberAnimation { duration: Theme.durationNormal } }
+        MouseArea { anchors.fill: parent; onClicked: storeDialog.close() }
+
+        Rectangle {
+            anchors.centerIn: parent
+            width: 420
+            radius: Theme.radiusLg
+            color: Theme.surface
+            height: storeContent.implicitHeight + Theme.spaceXxl
+
+            Column {
+                id: storeContent
+                anchors.centerIn: parent
+                width: parent.width - Theme.spaceXxl
+                spacing: Theme.spaceMd
+
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: 64; height: 64
+                    radius: Theme.radiusMd
+                    color: Theme.iconContainer
+                    Text { anchors.centerIn: parent; text: "⛏"; font.pixelSize: 30 }
+                }
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "Minecraft"
+                    font.family: Theme.fontInterface
+                    font.pixelSize: Theme.sizeH3
+                    font.weight: Font.DemiBold
+                    color: Theme.textPrimary
+                }
+                Text {
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    text: LocalizationManager.tr("store.demoPermissions")
+                    font.family: Theme.fontInterface
+                    font.pixelSize: Theme.sizeCaption
+                    color: Theme.textSecondary
+                    wrapMode: Text.WordWrap
+                }
+
+                KidsButton {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: !storeDialog.myRequest
+                    text: LocalizationManager.tr("store.requestInstall")
+                    onClicked: storeDialog.request()
+                }
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: !!storeDialog.myRequest
+                    text: storeDialog.myRequest ? LocalizationManager.tr("store.status." + storeDialog.myRequest.status) : ""
+                    font.family: Theme.fontInterface
+                    font.pixelSize: Theme.sizeBody
+                    font.weight: Font.Medium
+                    color: storeDialog.myRequest && storeDialog.myRequest.status === "denied" ? Theme.error : Theme.success
+                }
+                KidsButton {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: LocalizationManager.tr("common.close")
+                    variant: "ghost"
+                    onClicked: storeDialog.close()
+                }
+            }
+        }
+    }
+
+    // ---- "Coming soon" placeholder dialog (Games, School, Help, KidsOS Updates) ----
     Rectangle {
         id: comingSoon
         anchors.fill: parent

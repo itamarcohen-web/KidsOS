@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>KidsOS</vendor>
+
+  <action id="org.kidsos.installer.approve">
+    <description>Approve, deny or revoke a KidsOS app request</description>
+    <description xml:lang="he">אישור, דחייה או ביטול בקשת אפליקציה ב-KidsOS</description>
+    <description xml:lang="ar">الموافقة على طلب تطبيق KidsOS أو رفضه أو إلغاؤه</description>
+    <message>A parent password is required for every approval decision</message>
+    <message xml:lang="he">נדרשת סיסמת הורה עבור כל החלטת אישור</message>
+    <message xml:lang="ar">مطلوبة كلمة مرور الوالد لكل قرار موافقة</message>
+    <defaults>
+      <!-- auth_admin (not auth_admin_keep): re-prompt every time, never
+           cache — spec §27 requires this to never be skippable. -->
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+  </action>
+</policyconfig>

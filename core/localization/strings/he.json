@@ -29,7 +29,9 @@
       "title": "מה השם שלך?",
       "placeholder": "הקלידו את השם שלכם",
       "greeting": "היי, %1!",
-      "greetingEmpty": "היי!"
+      "greetingEmpty": "היי!",
+      "childIntro": "עכשיו נגדיר את המרחב של הילד",
+      "usernamePlaceholder": "שם משתמש"
     },
     "avatar": {
       "title": "בחרו אווטאר",
@@ -62,12 +64,27 @@
       "subtitle": "בחרו 4 מספרים שרק אתם יודעים.",
       "confirmTitle": "אשרו את קוד ה-PIN",
       "confirmSubtitle": "הקלידו אותו שוב.",
-      "mismatch": "אלה לא תואמים — בואו ננסה שוב."
+      "mismatch": "אלה לא תואמים — בואו ננסה שוב.",
+      "accountError": "משהו השתבש ביצירת החשבון. בואו ננסה שוב."
     },
     "finish": {
       "title": "הכול מוכן!",
       "subtitle": "המחשב שלך מוכן.",
       "cta": "כניסה ל־KIDS"
+    },
+    "parentAccount": {
+      "title": "בואו נגדיר את חשבון ההורה",
+      "subtitle": "חשבון זה יקבל שליטה מלאה במחשב.",
+      "namePlaceholder": "השם שלך",
+      "usernamePlaceholder": "שם משתמש"
+    },
+    "parentPassword": {
+      "title": "יצירת סיסמה",
+      "subtitle": "זו סיסמת ההתחברות האמיתית שלך — שמרו עליה.",
+      "placeholder": "סיסמה",
+      "confirmPlaceholder": "אימות סיסמה",
+      "creating": "יוצרים חשבון…",
+      "error": "משהו השתבש. נסו שם משתמש אחר."
     }
   },
   "desktop": {
@@ -206,6 +223,53 @@
     },
     "accessibility": {
       "reduceMotion": "הפחתת אנימציות"
+    },
+    "managedByParent": "הגדרה זו מנוהלת על ידי ההורה."
+  },
+  "login": {
+    "whoIsUsing": "מי משתמש ב-KIDS?",
+    "welcomeBack": "ברוך שובך, %1",
+    "wrongPin": "קוד ה-PIN לא נראה נכון.",
+    "wrongPassword": "הסיסמה לא נראית נכונה."
+  },
+  "approvals": {
+    "title": "בקשות אפליקציות",
+    "tab": {
+      "pending": "ממתינות",
+      "trusted": "אפליקציות מאושרות"
+    },
+    "requestedBy": "התבקש על ידי %1",
+    "externalSource": "קובץ שהורד",
+    "storeSource": "חנות קידס",
+    "approve": "אישור",
+    "deny": "דחייה",
+    "revoke": "ביטול",
+    "approved": "מאושר",
+    "noPending": "אין בקשות כרגע.",
+    "noTrusted": "עדיין אין אפליקציות חיצוניות מאושרות."
+  },
+  "parentMode": {
+    "label": "מצב הורה"
+  },
+  "fileGuard": {
+    "title": "נדרש אישור הורה",
+    "body": "“%1” הורד מחוץ לחנות קידס. בקשו מההורה לאשר אותו לפני שתוכלו לפתוח אותו.",
+    "sentTitle": "הבקשה נשלחה!",
+    "sentBody": "בקשו מההורה לאשר אותה במסך בקשות האפליקציות.",
+    "askParent": "בקשה מהורה"
+  },
+  "dock": {
+    "switchUser": "החלפת משתמש"
+  },
+  "store": {
+    "demoPermissions": "דורש: אינטרנט, קבצים",
+    "requestInstall": "בקשת התקנה",
+    "status": {
+      "pending": "ממתין לאישור ההורה…",
+      "approved": "אושר! בקשו מההורה לסיים את ההתקנה.",
+      "denied": "ההורה אמר לא הפעם.",
+      "installed": "הותקן!",
+      "failed": "משהו השתבש. נסו שוב מאוחר יותר."
     }
   }
 }

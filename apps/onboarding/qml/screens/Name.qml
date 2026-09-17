@@ -7,10 +7,11 @@ import KidsOS.Common
 OnboardingPage {
     id: page
     required property QtObject appState
-    primaryEnabled: nameField.text.trim().length > 0
+    primaryEnabled: nameField.text.trim().length > 0 && Bridge.isValidUsername(usernameField.text)
     onBack: Controls.StackView.view.goBack()
     onPrimaryActivated: {
         page.appState.name = nameField.text.trim()
+        page.appState.username = usernameField.text
         Controls.StackView.view.goToStep(page.stepIndex + 1)
     }
 
@@ -18,6 +19,18 @@ OnboardingPage {
         anchors.centerIn: parent
         width: Math.min(parent.width * 0.7, 560)
         spacing: Theme.spaceXxl
+
+        Text {
+            // Marks the start of the "child profile" phase (Name → Avatar
+            // → Age → PIN) — spec §5's "Now let's set up your child's
+            // space" moment.
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: LocalizationManager.tr("onboarding.name.childIntro")
+            font.family: Theme.fontInterface
+            font.pixelSize: Theme.sizeBody
+            font.weight: Font.Medium
+            color: Theme.logo.k
+        }
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -51,6 +64,32 @@ OnboardingPage {
                 placeholderText: LocalizationManager.tr("onboarding.name.placeholder")
                 background: Item {}
                 focus: true
+                onTextChanged: if (!usernameField.editedManually) usernameField.text = Bridge.suggestUsername(text)
+                Keys.onReturnPressed: usernameField.forceActiveFocus()
+            }
+        }
+
+        Rectangle {
+            width: parent.width
+            height: 64
+            radius: Theme.radiusLg
+            color: Theme.surface
+            border.width: usernameField.activeFocus ? 3 : 1
+            border.color: usernameField.activeFocus ? Theme.primary : Theme.border
+            Behavior on border.color { ColorAnimation { duration: Theme.durationFast } }
+
+            Controls.TextField {
+                id: usernameField
+                property bool editedManually: false
+                anchors.fill: parent
+                anchors.margins: Theme.spaceMd
+                verticalAlignment: Text.AlignVCenter
+                font.family: Theme.fontInterface
+                font.pixelSize: Theme.sizeBody
+                color: Theme.textPrimary
+                placeholderText: LocalizationManager.tr("onboarding.name.usernamePlaceholder")
+                background: Item {}
+                onTextEdited: editedManually = true
                 Keys.onReturnPressed: if (page.primaryEnabled) page.primaryActivated()
             }
         }

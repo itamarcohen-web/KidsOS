@@ -1,5 +1,8 @@
 #include "LauncherBridge.h"
 
+#include <QDBusConnection>
+#include <QDBusInterface>
+#include <QDBusReply>
 #include <QDir>
 #include <QFile>
 #include <QJsonDocument>
@@ -63,4 +66,42 @@ void LauncherBridge::saveAppearanceMode(const QString &mode)
         file.write(QJsonDocument(settings).toJson(QJsonDocument::Indented));
         file.close();
     }
+}
+
+bool LauncherBridge::switchUser()
+{
+    QDBusInterface auth(QStringLiteral("org.kidsos.Auth1"), QStringLiteral("/org/kidsos/Auth1"),
+                         QStringLiteral("org.kidsos.Auth1"), QDBusConnection::systemBus());
+    if (!auth.isValid())
+        return false;
+    QDBusReply<bool> reply = auth.call(QStringLiteral("SwitchToGreeter"));
+    return reply.isValid() && reply.value();
+}
+
+QString LauncherBridge::submitInstallRequest(const QString &appId, const QString &appName,
+                                              const QStringList &permissions)
+{
+    QDBusInterface installer(QStringLiteral("org.kidsos.Installer1"),
+                              QStringLiteral("/org/kidsos/Installer1"),
+                              QStringLiteral("org.kidsos.Installer1"), QDBusConnection::systemBus());
+    if (!installer.isValid())
+        return QString();
+
+    const QString childId = qEnvironmentVariable("USER");
+    QDBusReply<QString> reply = installer.call(QStringLiteral("SubmitInstallRequest"), childId, appId,
+                                                appName, QStringLiteral("kids-store"), permissions);
+    return reply.isValid() ? reply.value() : QString();
+}
+
+QVariantList LauncherBridge::myInstallRequests()
+{
+    QDBusInterface installer(QStringLiteral("org.kidsos.Installer1"),
+                              QStringLiteral("/org/kidsos/Installer1"),
+                              QStringLiteral("org.kidsos.Installer1"), QDBusConnection::systemBus());
+    if (!installer.isValid())
+        return {};
+
+    const QString childId = qEnvironmentVariable("USER");
+    QDBusReply<QVariantList> reply = installer.call(QStringLiteral("ListRequests"), childId);
+    return reply.isValid() ? reply.value() : QVariantList();
 }

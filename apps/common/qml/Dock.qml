@@ -18,6 +18,7 @@ Item {
     signal searchRequested()
     signal notificationsRequested()
     signal quickSettingsRequested()
+    signal switchUserRequested()
     signal pinnedAppActivated(var app)
 
     implicitHeight: 72
@@ -123,6 +124,31 @@ Item {
                         font.weight: Font.Bold
                     }
                 }
+            }
+        }
+
+        Rectangle { Layout.preferredWidth: 1; Layout.fillHeight: true; Layout.margins: Theme.spaceSm; color: Theme.border }
+
+        Controls.AbstractButton {
+            id: switchUserButton
+            focusPolicy: Qt.StrongFocus
+            hoverEnabled: true
+            onClicked: root.switchUserRequested()
+            implicitWidth: 44; implicitHeight: 44
+            Controls.ToolTip.visible: switchUserButton.hovered
+            Controls.ToolTip.text: LocalizationManager.tr("dock.switchUser")
+
+            background: Rectangle {
+                radius: Theme.radiusMd
+                color: switchUserButton.hovered || switchUserButton.visualFocus ? Theme.surfaceAlt : "transparent"
+                border.width: switchUserButton.visualFocus ? 2 : 0
+                border.color: Theme.primary
+                Behavior on color { ColorAnimation { duration: Theme.durationFast } }
+            }
+            contentItem: Text {
+                anchors.centerIn: parent
+                text: "\u{1F504}"
+                font.pixelSize: 18
             }
         }
 

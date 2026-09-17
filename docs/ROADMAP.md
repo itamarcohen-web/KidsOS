@@ -5,38 +5,38 @@ only placeholders or stable extension points exist for them:
 
 | Feature | Current state | Where it plugs in |
 |---|---|---|
-| Kids Store | "Coming soon" dialog, reachable from the home screen, launcher grid ("Internet" category) and search | `apps/launcher/qml/Main.qml` (`comingSoon` dialog, `store` app entry) |
+| Kids Store real catalog | One demo app ("Minecraft") exercises the real `InstallRequest` flow end to end | `apps/launcher/qml/Main.qml` (`storeDialog`), `kidsos-installer` |
 | Parent Cloud / Parent App pairing | Mocked QR + pairing code, fake "connected" state | `apps/onboarding/qml/screens/ParentConnect.qml` |
-| Parent PIN / parent authentication | Not implemented — only the **child** PIN exists | `ProfileBridge::setChildPin` is deliberately separate from any future parent credential |
-| Screen Time | Not implemented | `LauncherBridge`/`ProfileBridge` are the natural place for a client-side hook |
-| Parent Controls / External App Approval | Not implemented | Settings' placeholder categories (`PlaceholderCategory.qml`) establish the visual pattern |
+| Screen Time | Not implemented | Settings placeholder category; `kidsos-policy`'s schema is the natural backend |
 | Safety AI / Screen Analysis / Web Protection | Not implemented | — |
-| Real networking for parent pairing | Not implemented | `ParentConnect.qml`'s mock connect sequence marks exactly where a real pairing protocol call would go |
+| Advanced App Approval *policy* UI (pre-authorizing categories/apps in advance, vs. reactive approve/deny) | Not implemented — the reactive flow (spec §16) *is* implemented (`kidsos-approvals`) | `kidsos-policy::SetAppPolicy` already exists as the backend hook |
+| External File Approval policy UI | Reactive flow implemented (`kidsos-file-guard-prompt` → `kidsos-approvals`); no *proactive* per-source-URL policy UI yet | `kidsos-policy` |
+| Device Management | Not implemented | — |
 | Real parent-approved notifications | Mock data only (`window.notifications` in `apps/launcher/qml/Main.qml`) | See `docs/DESKTOP_SHELL.md` |
 
-## Desktop shell follow-ups (this milestone's scope)
+## Security/account follow-ups (this milestone's scope)
 
-- **Wire Quick Settings' Wi-Fi/Bluetooth/Night Light** to real
-  NetworkManager (`org.freedesktop.NetworkManager` D-Bus), BlueZ, and a
-  night-color backend (`kwin`'s built-in night color via its D-Bus
-  interface). Only Dark Mode is real today; see `docs/DESKTOP_SHELL.md`.
-- **System-wide search's file results** (`SearchOverlay.filesModel`) —
-  the component already accepts a files model and renders it identically
-  to apps/settings results; nothing populates it yet (would need a
-  lightweight indexer, e.g. over `~/Documents`, `~/School`, etc.).
-- **`Theme.systemPrefersDark`** isn't wired to a real Plasma color-scheme
-  read yet, so Settings → Appearance → "Match system" currently behaves
-  like Light. Needs a small C++ hook (e.g. watching
-  `org.kde.kdeglobals`'s `[General] ColorScheme` or `KColorSchemeManager`)
-  in one of the bridges.
-- **`Theme.reducedMotion`** is a manual toggle in Settings → Accessibility
-  today, not auto-detected from the system accessibility setting.
-- **KWin/Aurorae window-decoration theming** ("Window Design" item 14) —
-  deliberately not attempted; see `docs/KNOWN_LIMITATIONS.md` for why.
-- Wire the remaining 9 Settings placeholder categories (Internet, Sound,
-  Bluetooth, Display, Keyboard, Mouse, Accounts, Storage, Apps) to real
-  functionality — each already has a consistent home via
-  `PlaceholderCategory.qml`.
-- Persist the selected UI language across app restarts the same way
-  appearance mode is persisted now (`settings.json`) — currently only
-  onboarding's one-time `profile.json` write does this.
+- **`Theme.systemPrefersDark`**, Quick Settings' Wi-Fi/Bluetooth/Night
+  Light, and the 9 remaining Settings placeholder categories: same gaps
+  as before — see `docs/DESKTOP_SHELL.md`.
+- **Async D-Bus calls in onboarding** — `ParentPassword.qml`/
+  `PinSetup.qml` call `kidsos-auth` synchronously; fine in practice
+  (`useradd`/`chpasswd` are fast) but a future pass could make these
+  properly async so the "Creating account…" state visibly renders.
+- **`Theme.reducedMotion`** is a manual Settings toggle, not yet
+  auto-detected from the system accessibility setting or persisted
+  across restarts.
+- **KWin/Aurorae window-decoration theming** — still not attempted; see
+  `docs/KNOWN_LIMITATIONS.md`.
+- **`SearchOverlay.filesModel`** still unpopulated (no file indexer yet).
+- **Async/queued audit log review UI** — entries go to the systemd
+  journal (`journalctl KIDSOS_AUDIT=1`); there's no in-app viewer for a
+  Parent yet, only the raw journal.
+- **fapolicyd/PAM/SDDM theme verification** — this milestone's biggest
+  gap: see `docs/KNOWN_LIMITATIONS.md`'s dedicated section. Everything
+  here is architecturally real (no fake checks, no hidden bypass
+  passwords) but literally could not be exercised against a running
+  Linux system in this development environment.
+- **`ChangeChildPin`/`SetAppPolicy`/`SetSettingManaged`** exist in the
+  services but have no UI wired to call them yet (e.g. no "change your
+  child's PIN" button in Settings) — the D-Bus contract is ready for one.

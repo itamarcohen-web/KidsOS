@@ -15,6 +15,7 @@ target_link_libraries(kidsos-settings PRIVATE
     Qt6::Qml
     Qt6::Quick
     Qt6::QuickControls2
+    Qt6::DBus
 )
 
 install(TARGETS kidsos-settings DESTINATION ${CMAKE_INSTALL_BINDIR})

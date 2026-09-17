@@ -1,13 +1,17 @@
 #!/usr/bin/bash
-# Decides whether the KidsOS session shows first-boot onboarding or the
-# regular desktop, based on the per-user "onboarding complete" flag that
-# ProfileBridge (apps/onboarding/src/ProfileBridge.cpp) writes on finish.
+# Autostarted at the beginning of every normal (non-setup) KidsOS
+# session, once account creation has already happened via the
+# kidsos-setup session (see docs/ACCOUNTS_AND_LOGIN.md). Branches on the
+# real Linux group membership established at account creation — not a
+# flag file — to decide what the logged-in account sees:
+#
+#   Parent (wheel member):    normal Plasma desktop, unmodified, plus a
+#                              small "Parent Mode" indicator (spec §12).
+#   Child (kidsos-children):  the full-screen KidsOS desktop shell.
 set -euo pipefail
 
-FLAG="${HOME}/.config/kidsos/onboarding-complete"
-
-if [[ -f "${FLAG}" ]]; then
-    exec /usr/bin/kidsos-launcher
+if id -nG "${USER}" | tr ' ' '\n' | grep -qx "wheel"; then
+    exec /usr/bin/kidsos-parent-indicator
 else
-    exec /usr/bin/kidsos-onboarding
+    exec /usr/bin/kidsos-launcher
 fi

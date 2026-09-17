@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=KidsOS App Guard
+Comment=Asks a parent before running a downloaded app
+Exec=/usr/bin/kidsos-file-guard-prompt %f
+Icon=kidsos-file-guard-prompt
+Terminal=false
+NoDisplay=true
+MimeType=application/x-executable;application/x-sharedlib;application/x-elf;text/x-shellscript;application/vnd.appimage;application/x-iso9660-appimage;application/x-debian-package;application/x-rpm;

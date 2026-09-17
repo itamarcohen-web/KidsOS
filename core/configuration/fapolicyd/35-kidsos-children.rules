@@ -1,0 +1,20 @@
+# KidsOS fapolicyd rules: restricts execution to trusted binaries for the
+# kidsos-children group only — the Parent account is unaffected and
+# falls through to fapolicyd's own stock default rules (installed
+# alongside this file in /etc/fapolicyd/rules.d/).
+#
+# "Trusted" = present in the RPM database (trust=1, i.e. every KidsOS
+# system binary and every dnf/rpm-ostree-installed package) OR listed in
+# /etc/fapolicyd/trust.d/kidsos-approved.trust by exact SHA-256 — see
+# core/services/kidsos-file-guard/FileGuardService.cpp and
+# docs/TRUST_MODEL.md.
+#
+# Rule syntax and exact placement/ordering relative to fapolicyd's own
+# shipped rules.d/*.rules files must be verified against the fapolicyd
+# version in the base image (`rpm -q fapolicyd`, `man fapolicyd.rules`)
+# on a real system — see docs/KNOWN_LIMITATIONS.md. Rules are evaluated
+# top-to-bottom, first match wins; this file's name (35-) is chosen to
+# sort before fapolicyd's stock default-deny rule (typically 90-*).
+
+allow perm=execute gid=kidsos-children trust=1
+deny_audit perm=execute gid=kidsos-children trust=0

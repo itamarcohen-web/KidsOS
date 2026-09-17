@@ -9,18 +9,20 @@ only be validated by static review (YAML/JSON syntax, manual QML read).
 ## 1. Validate the recipe locally (fast, no build)
 
 ```bash
-python3 tests/validate_recipe.py
-python3 tests/validate_locales.py
+bash tests/run_tests.sh
 ```
 
-Both were run during development and pass — they check YAML/JSON syntax
-and that `en`/`he`/`ar` locale files have identical key sets.
+Runs recipe/locale/brand-color/D-Bus-consistency/trust-model checks —
+all pass as of this milestone. See `docs/KNOWN_LIMITATIONS.md` for what
+these do and don't prove.
 
-## 2. Build the app binaries directly (sanity check, no image)
+## 2. Build the app/service binaries directly (sanity check, no image)
 
 On a Linux machine with Qt6 + KDE Frameworks 6 dev packages
 (`qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtquickcontrols2-devel
-qt6-qtsvg-devel cmake gcc-c++ extra-cmake-modules` on Fedora):
+qt6-qtsvg-devel systemd-devel cmake gcc-c++ extra-cmake-modules
+pkgconf-pkg-config` on Fedora — `systemd-devel` is new this milestone,
+for the audit-log services' `libsystemd` dependency):
 
 ```bash
 cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/usr
@@ -42,8 +44,16 @@ export KIDSOS_DEV_LOCALES_PATH="file://$PWD/core/localization/strings/"
 need to install anything system-wide to run an app straight from the
 source tree.
 
-Swap `apps/onboarding` for `apps/launcher` or `apps/settings` to run the
-other two.
+Swap `apps/onboarding` for `apps/launcher`, `apps/settings`,
+`apps/files`, `apps/approvals`, `apps/parent-indicator` or
+`apps/file-guard-prompt` to run the others.
+
+The four `core/services/kidsos-*` binaries need the system D-Bus policy
+files (`core/configuration/dbus-1/system.d/*.conf`) and polkit actions
+(`core/configuration/polkit/actions/*.policy`) installed and
+`polkitd`/`dbus-broker` running to do anything useful standalone —
+that's realistically a VM-level test, not a plain `cmake --build` one.
+See `docs/SECURITY_ARCHITECTURE.md` for what each service needs.
 
 ## 3. Build the full BlueBuild OCI image
 
@@ -60,8 +70,11 @@ bluebuild build recipes/recipe.yml
 ```
 
 This runs the `recipes/build-kidsos-apps.sh` script module inside the
-container (compiling the three Qt6 apps, fetching the Rubik/Baloo 2
-fonts — this step needs network access), layers on the `rpm-ostree` and
+container (compiling all the Qt6 apps and the four `kidsos-*` D-Bus
+services, fetching the Rubik/Nunito fonts — this step needs network
+access, installing the SDDM theme, provisioning the `kidsos-setup`/
+`kidsos-service` system users, enabling `pam_faillock` via authselect,
+and compiling initial fapolicyd rules), layers on the `rpm-ostree` and
 `default-flatpaks` modules, and produces a local OCI image.
 
 In CI, `.github/workflows/build.yml` calls BlueBuild's reusable GitHub
@@ -114,7 +127,9 @@ uses its own QEMU/Apple Virtualization backend and is the most practical
 option if your build host is a Mac.)
 
 Install to the virtual disk, reboot, and walk through the manual QA
-checklist at `tests/checklist_manual_qa.md`: onboarding in English,
-Hebrew and Arabic; RTL mirroring; keyboard-only completion; confirming
-`id kid` shows no `wheel` membership; confirming the desktop appears
-after "Enter KIDS".
+checklist at `tests/checklist_manual_qa.md` — this milestone's "Family
+accounts & permissions" section is the priority: Parent/Child account
+creation and login, `sudo` denial for the child, the fapolicyd
+external-app block (try to bypass it via a terminal — that's the most
+important single test in the whole checklist), and the full
+approve/deny/revoke flow through `kidsos-approvals`.

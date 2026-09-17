@@ -12,7 +12,7 @@ endif()
 
 include(GNUInstallDirs)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2 DBus)
 
 # Every KidsOS app reads shared QML modules and JSON locale tables from
 # these two well-known runtime paths (see docs/ARCHITECTURE.md).
@@ -37,3 +37,12 @@ add_subdirectory(apps/onboarding)
 add_subdirectory(apps/launcher)
 add_subdirectory(apps/settings)
 add_subdirectory(apps/files)
+add_subdirectory(apps/approvals)
+add_subdirectory(apps/parent-indicator)
+add_subdirectory(apps/file-guard-prompt)
+
+# ---- Privileged D-Bus services (see docs/SECURITY_ARCHITECTURE.md) ----
+add_subdirectory(core/services/kidsos-auth)
+add_subdirectory(core/services/kidsos-policy)
+add_subdirectory(core/services/kidsos-installer)
+add_subdirectory(core/services/kidsos-file-guard)

@@ -29,7 +29,9 @@
       "title": "ما اسمك؟",
       "placeholder": "اكتب اسمك",
       "greeting": "مرحباً، %1!",
-      "greetingEmpty": "مرحباً!"
+      "greetingEmpty": "مرحباً!",
+      "childIntro": "لنقم الآن بإعداد مساحة الطفل",
+      "usernamePlaceholder": "اسم المستخدم"
     },
     "avatar": {
       "title": "اختر الصورة الرمزية",
@@ -62,12 +64,27 @@
       "subtitle": "اختر 4 أرقام يعرفها أنت فقط.",
       "confirmTitle": "أكّد رمز PIN",
       "confirmSubtitle": "أدخله مرة أخرى.",
-      "mismatch": "الرمزان غير متطابقين — لنحاول مرة أخرى."
+      "mismatch": "الرمزان غير متطابقين — لنحاول مرة أخرى.",
+      "accountError": "حدث خطأ ما أثناء إنشاء الحساب. لنحاول مرة أخرى."
     },
     "finish": {
       "title": "كل شيء جاهز!",
       "subtitle": "حاسوبك جاهز.",
       "cta": "الدخول إلى KIDS"
+    },
+    "parentAccount": {
+      "title": "لنقم بإعداد حساب الوالد",
+      "subtitle": "هذا الحساب لديه تحكم كامل في هذا الكمبيوتر.",
+      "namePlaceholder": "اسمك",
+      "usernamePlaceholder": "اسم المستخدم"
+    },
+    "parentPassword": {
+      "title": "إنشاء كلمة مرور",
+      "subtitle": "هذه كلمة مرور تسجيل الدخول الحقيقية — احتفظ بها آمنة.",
+      "placeholder": "كلمة المرور",
+      "confirmPlaceholder": "تأكيد كلمة المرور",
+      "creating": "جارٍ إنشاء الحساب…",
+      "error": "حدث خطأ ما. جرّب اسم مستخدم آخر."
     }
   },
   "desktop": {
@@ -206,6 +223,53 @@
     },
     "accessibility": {
       "reduceMotion": "تقليل الحركة"
+    },
+    "managedByParent": "هذا الإعداد تتم إدارته بواسطة ولي الأمر."
+  },
+  "login": {
+    "whoIsUsing": "من يستخدم KIDS؟",
+    "welcomeBack": "مرحباً بعودتك، %1",
+    "wrongPin": "رمز PIN هذا غير صحيح.",
+    "wrongPassword": "كلمة المرور هذه غير صحيحة."
+  },
+  "approvals": {
+    "title": "طلبات التطبيقات",
+    "tab": {
+      "pending": "قيد الانتظار",
+      "trusted": "التطبيقات الموثوقة"
+    },
+    "requestedBy": "طلب بواسطة %1",
+    "externalSource": "ملف تم تنزيله",
+    "storeSource": "متجر Kids",
+    "approve": "موافقة",
+    "deny": "رفض",
+    "revoke": "إلغاء",
+    "approved": "تمت الموافقة",
+    "noPending": "لا توجد طلبات حالياً.",
+    "noTrusted": "لا توجد تطبيقات خارجية موثوقة بعد."
+  },
+  "parentMode": {
+    "label": "وضع الوالد"
+  },
+  "fileGuard": {
+    "title": "مطلوبة موافقة الوالد",
+    "body": "تم تنزيل “%1” من خارج متجر Kids. اطلب من والدك الموافقة عليه قبل أن تتمكن من فتحه.",
+    "sentTitle": "تم إرسال الطلب!",
+    "sentBody": "اطلب من والدك الموافقة عليه في طلبات التطبيقات.",
+    "askParent": "اسأل الوالد"
+  },
+  "dock": {
+    "switchUser": "تبديل المستخدم"
+  },
+  "store": {
+    "demoPermissions": "يحتاج إلى: الإنترنت، الملفات",
+    "requestInstall": "طلب التثبيت",
+    "status": {
+      "pending": "بانتظار موافقة والدك…",
+      "approved": "تمت الموافقة! اطلب من والدك إتمام التثبيت.",
+      "denied": "قال والدك ليس هذه المرة.",
+      "installed": "تم التثبيت!",
+      "failed": "حدث خطأ ما. حاول مرة أخرى لاحقاً."
     }
   }
 }

@@ -3,14 +3,18 @@
 Do this after following `docs/BUILD.md` end to end. Check off each item;
 note any failure with enough detail to file a bug.
 
-## Boot & first-boot account
+## Boot & first-boot setup
 
 - [ ] ISO boots to the Fedora Kinoite installer; install completes.
-- [ ] After first reboot, the system logs in without a password prompt
-      and goes straight to KidsOS onboarding (not a KDE desktop).
-- [ ] `id kid` (via a TTY/SSH as another user, or `journalctl` review)
-      shows **no** `wheel` group membership.
-- [ ] `/var/lib/kidsos/firstboot-done` exists after first boot.
+- [ ] After first reboot, the system autologs into `kidsos-setup` and
+      goes straight to KidsOS onboarding (not a KDE desktop, no
+      password prompt).
+- [ ] Onboarding now asks for the **Parent account** (name, username,
+      password, confirm) before the child profile — spec §2.
+- [ ] After onboarding finishes, the system does **not** re-autologin
+      into `kidsos-setup` — `/etc/sddm.conf.d/kidsos-setup-autologin.conf`
+      should be gone (`AuthService::MarkFirstBootComplete`), and the
+      KidsOS login screen (not a desktop) appears.
 
 ## Onboarding — English
 
@@ -162,6 +166,77 @@ note any failure with enough detail to file a bug.
 - [ ] KIDS logo renders correctly and stays legible at both the large
       (desktop/About) and compact (top bar/sidebar) sizes, with visible
       per-letter rotation at the large size.
+
+## Family accounts & permissions (milestone 3, spec §37)
+
+The 20 items the spec explicitly asks for testing, in order:
+
+1. [ ] **Parent account creation** — onboarding's Parent Account +
+   Parent Password screens create a real Linux user (`id <parentuser>`
+   succeeds, shows `wheel` in groups).
+2. [ ] **Child account creation** — same, no `wheel`, shows
+   `kidsos-children`.
+3. [ ] **Parent authentication** — the KidsOS login screen's Parent card
+   accepts the real password set during onboarding and rejects a wrong
+   one with the friendly "That password doesn't look right" message.
+4. [ ] **Child authentication** — same for the Child card + PIN, "That
+   PIN doesn't look right" on failure.
+5. [ ] **Child has no sudo** — as the child, `sudo -l` / any `sudo`
+   command fails; `groups` doesn't list `wheel`.
+6. [ ] **Parent has administrative privileges** — as the parent, `sudo
+   whoami` succeeds (after a password prompt).
+7. [ ] **Child cannot modify system-wide KidsOS policy** — as the
+   child, `cat /etc/kidsos/policy.json` fails (permission denied) and
+   there is no write access.
+8. [ ] **Child cannot directly install external package files** —
+   download a `.rpm`, double-click it: KidsOS's approval dialog appears
+   instead of a package-manager install; `sudo dnf install ./foo.rpm`
+   as the child fails at the `sudo` step already (see #5).
+9. [ ] **Child cannot directly execute untrusted AppImage** — download
+   an AppImage, `chmod +x` it in a terminal, run it directly
+   (`./foo.AppImage`, bypassing the GUI dialog entirely) — fapolicyd
+   should still block the exec. This is the single most important test
+   in this checklist; see `docs/TRUST_MODEL.md`.
+10. [ ] **External install request is created** — after the "Ask
+    parent" dialog, `kidsos-approvals` (as Parent) shows it under
+    Pending.
+11. [ ] **Parent can approve request** — clicking Approve prompts for
+    the Parent password (polkit) every time, then the app can run.
+12. [ ] **Parent can deny request** — clicking Deny requires the same
+    prompt; the child's attempt to run it afterward still fails.
+13. [ ] **Approved file hash is enforced** — after approval, confirm
+    `/etc/fapolicyd/trust.d/kidsos-approved.trust` contains the file's
+    exact SHA-256 (`sha256sum` the file and compare).
+14. [ ] **Modified file invalidates approval** — after approval, `echo
+    x >> approved-file.AppImage` (or any content change), then try to
+    run it again: it should be blocked (new hash ≠ trusted hash), and a
+    re-approval attempt on the *original* request should fail (see
+    `tests/validate_trust_model_invariants.py` for the code-level
+    guarantee this exercises).
+15. [ ] **Parent can revoke trust** — in `kidsos-approvals`' Trusted
+    Apps tab, Revoke removes the entry and the file stops running.
+16. [ ] **English login** — full picker → credentials → desktop flow.
+17. [ ] **Hebrew login** — same, RTL.
+18. [ ] **Arabic login** — same, RTL.
+19. [ ] **RTL authentication UI** — card picker, back button, PIN pad,
+    and the polkit password dialog itself (a KDE system component, not
+    ours — confirm it also respects the system language) all mirror
+    correctly.
+20. [ ] **Switching users** — from the child desktop, Dock's switch-user
+    button returns to the login screen (current session stays running
+    in the background); selecting Parent there requires the real
+    password again, no shortcut.
+
+## End-to-end VM flow (spec §38)
+
+Power on → KIDS login screen → select Parent → enter Parent password →
+Parent desktop (normal Plasma + small "Parent Mode" badge, top corner)
+→ log out / switch user → select Child → enter Child PIN → Child
+desktop → download an external executable → attempt to run it → KidsOS
+blocks it (fapolicyd) → "Parent approval required" dialog → request
+parent approval → switch to Parent → approve in `kidsos-approvals` →
+return to Child → execute the now-approved application → verify that
+modifying the file afterward invalidates the approval (item 14 above).
 
 ## Regression pass
 

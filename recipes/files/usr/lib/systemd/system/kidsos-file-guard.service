@@ -1,0 +1,21 @@
+[Unit]
+Description=KidsOS external-application trust enforcement (org.kidsos.FileGuard1)
+Documentation=man:kidsos-file-guard(8)
+After=dbus.service fapolicyd.service
+Requires=dbus.service
+Wants=fapolicyd.service
+
+[Service]
+Type=dbus
+BusName=org.kidsos.FileGuard1
+ExecStart=/usr/libexec/kidsos/kidsos-file-guard
+Restart=on-failure
+# Root is required: it edits /etc/fapolicyd/trust.d/ and reloads
+# fapolicyd. Only kidsos-installer (also root) may call it — see
+# core/configuration/dbus-1/system.d/org.kidsos.FileGuard1.conf.
+User=root
+NoNewPrivileges=false
+ProtectSystem=false
+
+[Install]
+WantedBy=multi-user.target

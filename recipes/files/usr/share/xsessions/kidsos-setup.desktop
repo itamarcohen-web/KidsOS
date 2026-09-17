@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=KidsOS Setup
+Comment=One-time first-boot family account setup
+Exec=/usr/bin/kidsos-onboarding
+DesktopNames=kidsos-setup
