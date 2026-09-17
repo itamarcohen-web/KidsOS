@@ -1,4 +1,3 @@
-# Builds and publishes the KidsOS image via BlueBuild's reusable workflow.
 name: Build KidsOS image
 
 on:
@@ -8,15 +7,22 @@ on:
       - "**.md"
       - "docs/**"
   pull_request:
-  schedule:
-    - cron: "0 6 * * *"
   workflow_dispatch:
 
 jobs:
   build:
-    uses: blue-build/github-workflow-templates/.github/workflows/build.yml@main
-    with:
-      recipe: recipe.yml
-      recipe_dir: recipes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build custom image and ISO
+        uses: blue-build/github-action@v1
+        with:
+          recipe_file: recipes/recipe.yml
     secrets:
       signing_secret: ${{ secrets.SIGNING_SECRET }}
