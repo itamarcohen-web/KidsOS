@@ -1,12 +1,4 @@
 # Builds and publishes the KidsOS image via BlueBuild's reusable workflow.
-#
-# NOTE: verify this against the current official BlueBuild template
-# (https://github.com/blue-build/template) before relying on it — the
-# reusable workflow's path/inputs can change between BlueBuild releases,
-# and this file could not be validated by actually running it in the
-# environment this repository was authored in (see
-# docs/KNOWN_LIMITATIONS.md). Requires a `SIGNING_SECRET` repository
-# secret from a cosign keypair — see docs/BUILD.md.
 name: Build KidsOS image
 
 on:
@@ -17,12 +9,12 @@ on:
       - "docs/**"
   pull_request:
   schedule:
-    - cron: "0 6 * * *" # daily rebuild for security updates
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 jobs:
   build:
-    uses: blue-build/github-workflow-templates/.github/workflows/build.yml@v1
+    uses: blue-build/github-workflow-templates/.github/workflows/build.yml@main
     with:
       recipe: recipe.yml
       recipe_dir: recipes
