@@ -8,7 +8,8 @@
     "back": "رجوع",
     "next": "التالي",
     "skip": "تخطّ الآن",
-    "continue": "متابعة"
+    "continue": "متابعة",
+    "close": "إغلاق"
   },
   "onboarding": {
     "welcome": {
@@ -70,10 +71,13 @@
     }
   },
   "desktop": {
-    "greeting": "مرحباً، %1",
-    "greetingEmpty": "مرحباً!",
-    "search": {
-      "placeholder": "ابحث عن تطبيقات وألعاب والمزيد"
+    "greeting": {
+      "morning": "صباح الخير، %1",
+      "morningEmpty": "صباح الخير!",
+      "afternoon": "نهارك سعيد، %1",
+      "afternoonEmpty": "نهارك سعيد!",
+      "evening": "مساء الخير، %1",
+      "eveningEmpty": "مساء الخير!"
     },
     "nav": {
       "apps": "التطبيقات",
@@ -87,16 +91,17 @@
       "connected": "واي فاي متصل",
       "disconnected": "لا يوجد واي فاي"
     },
+    "frequentlyUsed": "الأكثر استخدامًا",
     "apps": {
       "launcher": "KIDS",
-      "browser": "المتصفح",
+      "browser": "متصفح Kids",
       "store": "متجر Kids",
       "games": "ألعاب",
       "school": "المدرسة",
       "music": "موسيقى",
-      "files": "الملفات",
+      "files": "ملفات Kids",
       "calculator": "الآلة الحاسبة",
-      "textEditor": "محرر النصوص",
+      "textEditor": "كاتب Kids",
       "screenshot": "لقطة شاشة",
       "video": "فيديو",
       "photos": "الصور",
@@ -109,14 +114,98 @@
       "comingSoonBody": "قريباً ستتمكن من اكتشاف تطبيقات وألعاب جديدة هنا، مختارة خصيصاً لك."
     }
   },
+  "launcher": {
+    "title": "التطبيقات",
+    "searchPlaceholder": "ابحث في تطبيقاتك",
+    "recentlyUsed": "المستخدمة مؤخراً",
+    "allApps": "كل التطبيقات",
+    "category": {
+      "all": "الكل",
+      "games": "ألعاب",
+      "school": "المدرسة",
+      "creativity": "الإبداع",
+      "internet": "الإنترنت",
+      "music": "موسيقى",
+      "video": "فيديو",
+      "tools": "أدوات"
+    }
+  },
+  "search": {
+    "placeholder": "ابحث في التطبيقات والإعدادات والملفات",
+    "noResults": "لم يتم العثور على شيء. جرّب كلمة أخرى.",
+    "kind": {
+      "app": "تطبيق",
+      "setting": "إعداد",
+      "file": "ملف"
+    }
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "clearAll": "مسح الكل",
+    "mock": {
+      "updateReady": {
+        "title": "تحديث KidsOS جاهز",
+        "body": "يمكنك إعادة التشغيل في أي وقت لتثبيته."
+      },
+      "downloadComplete": {
+        "title": "اكتمل التنزيل",
+        "body": "انتهى تنزيل ملفك."
+      },
+      "parentApproved": {
+        "title": "وافق والدك على Minecraft",
+        "body": "يمكنك الآن إيجاده في متجر Kids."
+      }
+    }
+  },
+  "quickSettings": {
+    "wifi": "واي فاي",
+    "bluetooth": "بلوتوث",
+    "darkMode": "الوضع الداكن",
+    "nightLight": "الإضاءة الليلية",
+    "volume": "مستوى الصوت"
+  },
+  "files": {
+    "title": "ملفات Kids",
+    "locations": {
+      "home": "الرئيسية",
+      "school": "المدرسة",
+      "documents": "المستندات",
+      "downloads": "التنزيلات",
+      "pictures": "الصور",
+      "music": "الموسيقى",
+      "videos": "الفيديوهات",
+      "desktop": "سطح المكتب"
+    }
+  },
   "settings": {
     "title": "الإعدادات",
-    "sections": {
-      "profile": "الملف الشخصي",
-      "language": "اللغة",
-      "display": "العرض وإمكانية الوصول",
+    "categories": {
+      "appearance": "المظهر",
+      "internet": "الإنترنت",
       "sound": "الصوت",
-      "about": "حول KIDS"
+      "bluetooth": "بلوتوث",
+      "display": "العرض",
+      "keyboard": "لوحة المفاتيح",
+      "mouse": "الفأرة",
+      "language": "اللغة",
+      "accounts": "الحسابات",
+      "storage": "التخزين",
+      "apps": "التطبيقات",
+      "accessibility": "إمكانية الوصول",
+      "about": "حول KidsOS"
+    },
+    "appearance": {
+      "title": "المظهر",
+      "light": "فاتح",
+      "dark": "داكن",
+      "system": "مطابقة النظام"
+    },
+    "about": {
+      "version": "إصدار KidsOS",
+      "tagline": "صُنع خصيصاً لـ KIDS، ومبني على Fedora Kinoite."
+    },
+    "accessibility": {
+      "reduceMotion": "تقليل الحركة"
     }
   }
 }

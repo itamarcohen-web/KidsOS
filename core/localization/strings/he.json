@@ -8,7 +8,8 @@
     "back": "חזרה",
     "next": "הבא",
     "skip": "דלג לעכשיו",
-    "continue": "המשך"
+    "continue": "המשך",
+    "close": "סגירה"
   },
   "onboarding": {
     "welcome": {
@@ -70,10 +71,13 @@
     }
   },
   "desktop": {
-    "greeting": "שלום, %1",
-    "greetingEmpty": "שלום!",
-    "search": {
-      "placeholder": "חיפוש אפליקציות, משחקים ועוד"
+    "greeting": {
+      "morning": "בוקר טוב, %1",
+      "morningEmpty": "בוקר טוב!",
+      "afternoon": "צהריים טובים, %1",
+      "afternoonEmpty": "צהריים טובים!",
+      "evening": "ערב טוב, %1",
+      "eveningEmpty": "ערב טוב!"
     },
     "nav": {
       "apps": "אפליקציות",
@@ -87,16 +91,17 @@
       "connected": "Wi-Fi מחובר",
       "disconnected": "אין Wi-Fi"
     },
+    "frequentlyUsed": "בשימוש תכוף",
     "apps": {
       "launcher": "KIDS",
-      "browser": "דפדפן",
+      "browser": "דפדפן קידס",
       "store": "חנות קידס",
       "games": "משחקים",
       "school": "בית ספר",
       "music": "מוזיקה",
-      "files": "קבצים",
+      "files": "קבצי קידס",
       "calculator": "מחשבון",
-      "textEditor": "עורך טקסט",
+      "textEditor": "כותב קידס",
       "screenshot": "צילום מסך",
       "video": "וידאו",
       "photos": "תמונות",
@@ -109,14 +114,98 @@
       "comingSoonBody": "בקרוב תוכלו לגלות כאן אפליקציות ומשחקים חדשים, שנבחרו במיוחד בשבילכם."
     }
   },
+  "launcher": {
+    "title": "אפליקציות",
+    "searchPlaceholder": "חיפוש באפליקציות שלך",
+    "recentlyUsed": "בשימוש לאחרונה",
+    "allApps": "כל האפליקציות",
+    "category": {
+      "all": "הכול",
+      "games": "משחקים",
+      "school": "בית ספר",
+      "creativity": "יצירתיות",
+      "internet": "אינטרנט",
+      "music": "מוזיקה",
+      "video": "וידאו",
+      "tools": "כלים"
+    }
+  },
+  "search": {
+    "placeholder": "חיפוש אפליקציות, הגדרות וקבצים",
+    "noResults": "לא נמצא כלום. נסו מילה אחרת.",
+    "kind": {
+      "app": "אפליקציה",
+      "setting": "הגדרה",
+      "file": "קובץ"
+    }
+  },
+  "notifications": {
+    "title": "התראות",
+    "clearAll": "ניקוי הכול",
+    "mock": {
+      "updateReady": {
+        "title": "עדכון KidsOS מוכן",
+        "body": "אפשר להפעיל מחדש בכל זמן כדי להתקין אותו."
+      },
+      "downloadComplete": {
+        "title": "ההורדה הושלמה",
+        "body": "הקובץ שלך סיים להוריד."
+      },
+      "parentApproved": {
+        "title": "ההורה שלך אישר את Minecraft",
+        "body": "עכשיו תוכלו למצוא אותו בחנות קידס."
+      }
+    }
+  },
+  "quickSettings": {
+    "wifi": "Wi-Fi",
+    "bluetooth": "בלוטות'",
+    "darkMode": "מצב כהה",
+    "nightLight": "אור לילה",
+    "volume": "עוצמת קול"
+  },
+  "files": {
+    "title": "קבצי קידס",
+    "locations": {
+      "home": "בית",
+      "school": "בית ספר",
+      "documents": "מסמכים",
+      "downloads": "הורדות",
+      "pictures": "תמונות",
+      "music": "מוזיקה",
+      "videos": "סרטונים",
+      "desktop": "שולחן עבודה"
+    }
+  },
   "settings": {
     "title": "הגדרות",
-    "sections": {
-      "profile": "פרופיל",
-      "language": "שפה",
-      "display": "תצוגה ונגישות",
+    "categories": {
+      "appearance": "מראה",
+      "internet": "אינטרנט",
       "sound": "צליל",
-      "about": "אודות KIDS"
+      "bluetooth": "בלוטות'",
+      "display": "תצוגה",
+      "keyboard": "מקלדת",
+      "mouse": "עכבר",
+      "language": "שפה",
+      "accounts": "חשבונות",
+      "storage": "אחסון",
+      "apps": "אפליקציות",
+      "accessibility": "נגישות",
+      "about": "אודות KidsOS"
+    },
+    "appearance": {
+      "title": "מראה",
+      "light": "בהיר",
+      "dark": "כהה",
+      "system": "התאמה למערכת"
+    },
+    "about": {
+      "version": "גרסת KidsOS",
+      "tagline": "נבנה במיוחד עבור KIDS, על בסיס Fedora Kinoite."
+    },
+    "accessibility": {
+      "reduceMotion": "הפחתת אנימציות"
     }
   }
 }

@@ -13,4 +13,8 @@ echo "== locale files =="
 python3 tests/validate_locales.py
 
 echo
+echo "== brand color tokens =="
+python3 tests/validate_brand_colors.py
+
+echo
 echo "All static checks passed."

@@ -21,7 +21,11 @@ QtObject {
     property bool systemPrefersDark: false
     readonly property bool isDark: mode === "dark" || (mode === "system" && systemPrefersDark)
 
-    readonly property bool reducedMotion: false // bound to org.kde accessibility setting by the shell at runtime
+    // Toggled from Settings > Accessibility (apps/settings/qml/categories/
+    // AccessibilityCategory.qml) and read by every entrance/transition
+    // animation in the shared component library. Not yet auto-detected
+    // from the system accessibility setting — see docs/KNOWN_LIMITATIONS.md.
+    property bool reducedMotion: false
 
     // ---- KIDS logo palette (also doubles as the brand accent set) ----
     // Slightly brightened in dark mode to keep contrast/vibrancy against

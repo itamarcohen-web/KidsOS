@@ -8,7 +8,8 @@
     "back": "Back",
     "next": "Next",
     "skip": "Skip for now",
-    "continue": "Continue"
+    "continue": "Continue",
+    "close": "Close"
   },
   "onboarding": {
     "welcome": {
@@ -70,10 +71,13 @@
     }
   },
   "desktop": {
-    "greeting": "Hello, %1",
-    "greetingEmpty": "Hello!",
-    "search": {
-      "placeholder": "Search apps, games and more"
+    "greeting": {
+      "morning": "Good morning, %1",
+      "morningEmpty": "Good morning!",
+      "afternoon": "Good afternoon, %1",
+      "afternoonEmpty": "Good afternoon!",
+      "evening": "Good evening, %1",
+      "eveningEmpty": "Good evening!"
     },
     "nav": {
       "apps": "Apps",
@@ -87,16 +91,17 @@
       "connected": "Wi-Fi connected",
       "disconnected": "No Wi-Fi"
     },
+    "frequentlyUsed": "Frequently used",
     "apps": {
       "launcher": "KIDS",
-      "browser": "Browser",
+      "browser": "Kids Browser",
       "store": "Kids Store",
       "games": "Games",
       "school": "School",
       "music": "Music",
-      "files": "Files",
+      "files": "Kids Files",
       "calculator": "Calculator",
-      "textEditor": "Text Editor",
+      "textEditor": "Kids Writer",
       "screenshot": "Screenshot",
       "video": "Video",
       "photos": "Photos",
@@ -109,14 +114,98 @@
       "comingSoonBody": "Soon you'll be able to discover new apps and games here, picked just for you."
     }
   },
+  "launcher": {
+    "title": "Apps",
+    "searchPlaceholder": "Search your apps",
+    "recentlyUsed": "Recently used",
+    "allApps": "All apps",
+    "category": {
+      "all": "All",
+      "games": "Games",
+      "school": "School",
+      "creativity": "Creativity",
+      "internet": "Internet",
+      "music": "Music",
+      "video": "Video",
+      "tools": "Tools"
+    }
+  },
+  "search": {
+    "placeholder": "Search apps, settings and files",
+    "noResults": "Nothing found. Try a different word.",
+    "kind": {
+      "app": "App",
+      "setting": "Setting",
+      "file": "File"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "clearAll": "Clear all",
+    "mock": {
+      "updateReady": {
+        "title": "KidsOS update ready",
+        "body": "Restart anytime to install it."
+      },
+      "downloadComplete": {
+        "title": "Download complete",
+        "body": "Your file finished downloading."
+      },
+      "parentApproved": {
+        "title": "Your parent approved Minecraft",
+        "body": "You can now find it in Kids Store."
+      }
+    }
+  },
+  "quickSettings": {
+    "wifi": "Wi-Fi",
+    "bluetooth": "Bluetooth",
+    "darkMode": "Dark Mode",
+    "nightLight": "Night Light",
+    "volume": "Volume"
+  },
+  "files": {
+    "title": "Kids Files",
+    "locations": {
+      "home": "Home",
+      "school": "School",
+      "documents": "Documents",
+      "downloads": "Downloads",
+      "pictures": "Pictures",
+      "music": "Music",
+      "videos": "Videos",
+      "desktop": "Desktop"
+    }
+  },
   "settings": {
     "title": "Settings",
-    "sections": {
-      "profile": "Profile",
-      "language": "Language",
-      "display": "Display & Accessibility",
+    "categories": {
+      "appearance": "Appearance",
+      "internet": "Internet",
       "sound": "Sound",
-      "about": "About KIDS"
+      "bluetooth": "Bluetooth",
+      "display": "Display",
+      "keyboard": "Keyboard",
+      "mouse": "Mouse",
+      "language": "Language",
+      "accounts": "Accounts",
+      "storage": "Storage",
+      "apps": "Apps",
+      "accessibility": "Accessibility",
+      "about": "About KidsOS"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "Match system"
+    },
+    "about": {
+      "version": "KidsOS version",
+      "tagline": "Made for KIDS, built on Fedora Kinoite."
+    },
+    "accessibility": {
+      "reduceMotion": "Reduce motion"
     }
   }
 }

@@ -36,3 +36,4 @@ install(FILES branding/logo/kids-logo.svg branding/logo/kids-mark.svg
 add_subdirectory(apps/onboarding)
 add_subdirectory(apps/launcher)
 add_subdirectory(apps/settings)
+add_subdirectory(apps/files)

@@ -15,3 +15,4 @@ LauncherOverlay 1.0 LauncherOverlay.qml
 SearchOverlay 1.0 SearchOverlay.qml
 NotificationCenter 1.0 NotificationCenter.qml
 QuickSettingsPanel 1.0 QuickSettingsPanel.qml
+ToggleRow 1.0 ToggleRow.qml

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
-# BlueBuild `script` module: compiles the three KidsOS Qt6/QML apps
-# (onboarding, launcher, settings) from source and installs branding
-# assets + fonts. Runs inside the image build container — see
+# BlueBuild `script` module: compiles the four KidsOS Qt6/QML apps
+# (onboarding, launcher, settings, files) from source and installs
+# branding assets + fonts. Runs inside the image build container — see
 # recipes/recipe.yml.
 #
 # Build-only dependencies are installed and removed within this single

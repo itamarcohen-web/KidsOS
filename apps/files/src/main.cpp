@@ -3,25 +3,24 @@
 #include <QQmlContext>
 #include <QIcon>
 
-#include "SettingsBridge.h"
+#include "FilesBridge.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    app.setApplicationName(QStringLiteral("KIDS Settings"));
+    app.setApplicationName(QStringLiteral("Kids Files"));
     app.setOrganizationName(QStringLiteral("KidsOS"));
-    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("kidsos-settings")));
+    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("kidsos-files")));
 
     QQmlApplicationEngine engine;
+    // See apps/onboarding/src/main.cpp for the QML2_IMPORT_PATH note.
+    engine.addImportPath(QStringLiteral(KIDSOS_QML_DIR));
+
+    FilesBridge bridge;
+    engine.rootContext()->setContextProperty(QStringLiteral("Bridge"), &bridge);
     engine.rootContext()->setContextProperty(
         QStringLiteral("KidsOSLocalesPathOverride"),
         qEnvironmentVariable("KIDSOS_DEV_LOCALES_PATH"));
-
-    SettingsBridge bridge;
-    engine.rootContext()->setContextProperty(QStringLiteral("Bridge"), &bridge);
-
-    // See apps/onboarding/src/main.cpp for the QML2_IMPORT_PATH note.
-    engine.addImportPath(QStringLiteral(KIDSOS_QML_DIR));
 
     const QString mainQml = qEnvironmentVariableIsSet("KIDSOS_DEV_APP_QML_DIR")
         ? qEnvironmentVariable("KIDSOS_DEV_APP_QML_DIR") + QStringLiteral("/Main.qml")

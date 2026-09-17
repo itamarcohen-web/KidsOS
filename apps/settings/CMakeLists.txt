@@ -1,5 +1,7 @@
 qt_add_executable(kidsos-settings
     src/main.cpp
+    src/SettingsBridge.h
+    src/SettingsBridge.cpp
 )
 
 target_compile_definitions(kidsos-settings PRIVATE

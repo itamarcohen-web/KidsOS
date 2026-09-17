@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Kids Files
+Comment=Browse your files
+Exec=/usr/bin/kidsos-files
+Icon=kidsos-files
+Terminal=false
+Categories=System;FileManager;

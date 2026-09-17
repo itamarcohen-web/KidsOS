@@ -49,13 +49,14 @@ modules:
   # ---- Runtime packages that back the default app tiles ----
   - type: rpm-ostree
     install:
-      - dolphin # Files
-      - kate # Text Editor
+      - dolphin # underlies Kids Files
+      - kate # underlies Kids Writer
       - kcalc # Calculator
       - spectacle # Screenshot
       - gwenview # Photos
       - elisa # Music
       - haruna # Video
+      - qt6-qtsvg # renders branding/*.svg (icons, wallpaper) at runtime
       - google-noto-sans-hebrew-fonts
       - google-noto-sans-arabic-fonts
       - google-noto-emoji-fonts

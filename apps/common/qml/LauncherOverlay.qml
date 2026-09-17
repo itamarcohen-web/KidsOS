@@ -26,8 +26,8 @@ Item {
     opacity: open ? 1 : 0
     scale: open ? 1 : 0.97
 
-    Behavior on opacity { NumberAnimation { duration: Theme.durationNormal; easing.type: Theme.easingStandard } }
-    Behavior on scale { NumberAnimation { duration: Theme.durationNormal; easing.type: Theme.easingStandard } }
+    Behavior on opacity { enabled: !Theme.reducedMotion; NumberAnimation { duration: Theme.durationNormal; easing.type: Theme.easingStandard } }
+    Behavior on scale { enabled: !Theme.reducedMotion; NumberAnimation { duration: Theme.durationNormal; easing.type: Theme.easingStandard } }
 
     onOpenChanged: if (open) { query = ""; activeCategory = "all"; searchField.forceActiveFocus() }
 

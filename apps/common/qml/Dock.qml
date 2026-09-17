@@ -25,6 +25,7 @@ Item {
 
     y: revealed ? 0 : height + Theme.spaceXxl
     Behavior on y {
+        enabled: !Theme.reducedMotion
         NumberAnimation { duration: Theme.durationNormal; easing.type: Theme.easingStandard }
     }
 

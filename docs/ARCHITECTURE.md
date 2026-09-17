@@ -5,7 +5,7 @@
 ```
 ┌─────────────────────────────────────────────────────────┐
 │ KidsOS apps (Qt6 + QML)                                  │
-│  apps/onboarding   apps/launcher   apps/settings          │
+│  apps/onboarding  apps/launcher  apps/settings  apps/files │
 ├─────────────────────────────────────────────────────────┤
 │ Shared runtime  (apps/common, branding/themes, core/…)    │
 │  KidsOS.Theme · KidsOS.Localization · KidsOS.Common        │
@@ -27,19 +27,20 @@ Plasma-shell level).
 
 ## Apps
 
-Three native Qt6/QML executables, each a thin `main.cpp` (QGuiApplication
+Four native Qt6/QML executables, each a thin `main.cpp` (QGuiApplication
 + QQmlApplicationEngine) loading a `Main.qml` that lives on disk under
 `/usr/share/kidsos/apps/<name>/qml/` (installed by CMake — see the root
 `CMakeLists.txt`). None of them use Qt Resource System/qrc bundling; QML
 is loaded straight from installed files, which keeps local development
-fast (`KIDSOS_DEV_QML_DIR` / `KIDSOS_DEV_APP_QML_DIR` env vars point the
-engine at the source tree instead — see `docs/BUILD.md`).
+fast (`QML2_IMPORT_PATH` / `KIDSOS_DEV_APP_QML_DIR` / `KIDSOS_DEV_LOCALES_PATH`
+env vars point the engine at the source tree instead — see `docs/BUILD.md`).
 
 | App | Binary | Purpose |
 |---|---|---|
 | Onboarding | `kidsos-onboarding` | First-boot setup wizard (8 screens) |
-| Launcher | `kidsos-launcher` | The KidsOS home screen / desktop |
-| Settings | `kidsos-settings` | Placeholder settings shell |
+| Launcher | `kidsos-launcher` | The KidsOS desktop: home screen, dock, launcher, search, notifications, quick settings — see `docs/DESKTOP_SHELL.md` |
+| Settings | `kidsos-settings` | 13-category settings shell (Appearance, Language and Accessibility functional; rest structured placeholders) |
+| Kids Files | `kidsos-files` | Branded front door onto the filesystem — 8 location cards that open Dolphin at the right path |
 
 ## Shared runtime modules
 
@@ -53,9 +54,12 @@ every app via `engine.addImportPath()`:
 - **`KidsOS.Localization`** (`core/localization/`) — runtime string
   loading (see `docs/LOCALIZATION.md`).
 - **`KidsOS.Common`** (`apps/common/qml/`) — the reusable component
-  library (`KidsButton`, `KidsCard`, `OnboardingPage`, `AppTile`, …) that
-  every screen in every app is built from, so the product feels like one
-  designed system rather than three separate apps.
+  library (`KidsButton`, `KidsCard`, `OnboardingPage`, `AppTile`, `Dock`,
+  `LauncherOverlay`, `SearchOverlay`, `NotificationCenter`,
+  `QuickSettingsPanel`, …) that every screen in every app is built from,
+  so the product feels like one designed system rather than four
+  separate apps. See `docs/DESKTOP_SHELL.md` for the desktop-specific
+  components.
 
 ## Session flow
 
