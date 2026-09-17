@@ -13,7 +13,7 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SOURCE = ROOT / "core/services/kidsos-installer/InstallerService.cpp"
+SOURCE = ROOT / "files/core/services/kidsos-installer/InstallerService.cpp"
 
 ok = True
 

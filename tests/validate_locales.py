@@ -8,7 +8,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-STRINGS_DIR = ROOT / "core" / "localization" / "strings"
+STRINGS_DIR = ROOT / "files" / "core" / "localization" / "strings"
 LANGUAGES = ["en", "he", "ar"]
 
 

@@ -11,7 +11,7 @@ polkit action is referenced but never defined:
 2. Every systemd unit's BusName= matches a registerService() call in
    that service's own main.cpp.
 3. Every polkit action ID passed to PolkitCheck::isAuthorized() is
-   defined in some core/configuration/polkit/actions/*.policy file.
+   defined in some files/system/usr/share/polkit-1/actions/*.policy file.
 """
 import pathlib
 import re
@@ -52,7 +52,7 @@ else:
 
 # ---- 2. systemd BusName= vs. registerService() ----
 for unit in ROOT.rglob("kidsos-*.service"):
-    if "core/services" in str(unit):
+    if "files/core/services" in str(unit):
         continue  # source dirs, not the systemd unit files
     text = unit.read_text(encoding="utf-8")
     m = re.search(r"^BusName=(\S+)", text, re.MULTILINE)
@@ -60,9 +60,9 @@ for unit in ROOT.rglob("kidsos-*.service"):
         continue
     bus_name = m.group(1)
     service_name = unit.stem  # e.g. "kidsos-auth"
-    main_cpp = ROOT / "core" / "services" / service_name / "main.cpp"
+    main_cpp = ROOT / "files" / "core" / "services" / service_name / "main.cpp"
     if not main_cpp.exists():
-        fail(f"{unit.name} has BusName={bus_name} but core/services/{service_name}/main.cpp doesn't exist")
+        fail(f"{unit.name} has BusName={bus_name} but files/core/services/{service_name}/main.cpp doesn't exist")
         continue
     main_text = main_cpp.read_text(encoding="utf-8")
     if f'registerService(QStringLiteral("{bus_name}"))' not in main_text:
@@ -74,7 +74,7 @@ for unit in ROOT.rglob("kidsos-*.service"):
 referenced_actions = set(re.findall(r'PolkitCheck::isAuthorized\([^,]+,\s*QStringLiteral\("([\w.-]+)"\)', cpp_text))
 
 defined_actions = set()
-for policy_file in ROOT.rglob("core/configuration/polkit/actions/*.policy"):
+for policy_file in ROOT.rglob("files/system/usr/share/polkit-1/actions/*.policy"):
     text = policy_file.read_text(encoding="utf-8")
     defined_actions |= set(re.findall(r'<action id="([\w.-]+)">', text))
 

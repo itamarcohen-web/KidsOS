@@ -35,17 +35,22 @@ def main() -> None:
     if not isinstance(recipe["modules"], list) or not recipe["modules"]:
         fail("recipe.yml 'modules' must be a non-empty list")
 
+    # BlueBuild requires every 'files'/'script' module reference to live
+    # under a literal top-level files/ directory (mounted into the build
+    # container as $CONFIG_DIRECTORY) — see the note at the top of
+    # recipes/recipe.yml and docs/BUILD.md.
+    files_dir = ROOT / "files"
     checked = 0
     for module in recipe["modules"]:
         if module.get("type") != "files":
             continue
         for entry in module.get("files", []):
-            source = ROOT / entry["source"]
+            source = files_dir / entry["source"]
             if not source.exists():
-                fail(f"files module source does not exist: {entry['source']}")
+                fail(f"files module source does not exist under files/: {entry['source']}")
             checked += 1
 
-    scripts_dir = ROOT / "recipes"
+    scripts_dir = files_dir / "scripts"
     for module in recipe["modules"]:
         if module.get("type") != "script":
             continue

@@ -3,52 +3,41 @@
 # Produces a Fedora Kinoite (KDE Plasma) based OCI image with the KidsOS
 # apps, branding, family account/permission system, and first-boot
 # experience baked in. Build with the official BlueBuild CLI or GitHub
-# Action — see docs/BUILD.md for exact commands; it cannot be built from
-# inside this repository's development sandbox (no container runtime /
-# Fedora build tooling available there).
+# Action — see docs/BUILD.md for exact commands.
+#
+# IMPORTANT: BlueBuild's `files` and `script` modules both require every
+# referenced path to live under a literal top-level `files/` directory
+# at the repo root (mounted into the build container at $CONFIG_DIRECTORY,
+# e.g. /tmp/files) — there is no way to reference repo-root-relative
+# paths directly. That's why the actual KidsOS source (apps/, core/,
+# branding/, CMakeLists.txt), the rootfs overlay (files/system/), and
+# the build script (files/scripts/) all live under files/ instead of at
+# the repo root. See docs/BUILD.md for the full explanation.
 name: kidsos
 description: >-
   KidsOS — a colorful, friendly operating system for kids and teens,
   built on Fedora Kinoite and KDE Plasma, with a real Parent/Child
   account and permission system.
 base-image: quay.io/fedora-ostree-desktops/kinoite
+# Bump this to the current stable Fedora release before building —
+# https://fedoraproject.org/releases/
 image-version: "41"
 
 modules:
-  # ---- Stage KidsOS app/service source into the build container ----
-  # Copied out again at the end of build-kidsos-apps.sh; see that script
-  # for why this doesn't bloat the final rootfs (net-zero diff within one
-  # RUN layer) even though it's a separate COPY layer.
+  # ---- Deploy the rootfs overlay: systemd units, desktop entries,
+  #      autostart glue, session wrapper, SDDM/xsession config, polkit
+  #      actions, D-Bus policy, fapolicyd rules — everything under
+  #      files/system/ maps 1:1 onto the final image's / ----
   - type: files
     files:
-      - source: apps
-        destination: /tmp/kidsos-src/apps
-      - source: core
-        destination: /tmp/kidsos-src/core
-      - source: branding
-        destination: /tmp/kidsos-src/branding
-      - source: CMakeLists.txt
-        destination: /tmp/kidsos-src/CMakeLists.txt
-
-  # ---- Deploy static system files: systemd units, desktop entries,
-  #      autostart glue, session wrapper, SDDM/xsession config ----
-  - type: files
-    files:
-      - source: recipes/files
+      - source: system
         destination: /
-      - source: core/configuration/polkit/10-kidsos-child-restrictions.rules
-        destination: /usr/share/polkit-1/rules.d/10-kidsos-child-restrictions.rules
-      - source: core/configuration/polkit/actions
-        destination: /usr/share/polkit-1/actions
-      - source: core/configuration/dbus-1/system.d
-        destination: /usr/share/dbus-1/system.d
-      - source: core/configuration/fapolicyd/35-kidsos-children.rules
-        destination: /etc/fapolicyd/rules.d/35-kidsos-children.rules
 
-  # ---- Compile the KidsOS apps + kidsos-* services, install
-  #      branding/fonts/SDDM theme, provision users/dirs (see that
-  #      script — this is the bulk of the family account system's
-  #      system-level setup) ----
+  # ---- Compile the KidsOS apps + kidsos-* services (source at
+  #      files/apps, files/core, files/branding, files/CMakeLists.txt —
+  #      all reachable from the script at $CONFIG_DIRECTORY, i.e.
+  #      /tmp/files), install branding/fonts/SDDM theme, provision
+  #      users/dirs. See files/scripts/build-kidsos-apps.sh. ----
   - type: script
     scripts:
       - build-kidsos-apps.sh
@@ -80,8 +69,7 @@ modules:
 
   # ---- Enable the KidsOS services + fapolicyd. Account creation is now
   #      always explicit through onboarding (kidsos-setup session) —
-  #      see docs/ACCOUNTS_AND_LOGIN.md — so there is no more
-  #      no-UI firstboot unit like milestone 1 had. ----
+  #      see docs/ACCOUNTS_AND_LOGIN.md. ----
   - type: systemd
     system:
       enabled:

@@ -21,7 +21,13 @@ dnf5 install -y \
     qt6-qtsvg-devel
 
 echo "kidsos: building KidsOS apps and services"
-cmake -S /tmp/kidsos-src -B /tmp/kidsos-build \
+# CONFIG_DIRECTORY is set by BlueBuild's script module to the mounted
+# files/ directory (files/CMakeLists.txt, files/apps, files/core,
+# files/branding all live right there) — see recipes/recipe.yml's
+# top-of-file note and docs/BUILD.md for why everything had to move
+# under files/. /tmp/files is the fallback for a manual local run.
+KIDSOS_SRC="${CONFIG_DIRECTORY:-/tmp/files}"
+cmake -S "${KIDSOS_SRC}" -B /tmp/kidsos-build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release
 cmake --build /tmp/kidsos-build --parallel "$(nproc)"
@@ -44,11 +50,11 @@ curl --fail --location --silent --show-error \
 fc-cache -f /usr/share/fonts/kidsos
 
 echo "kidsos: installing Plasma color scheme"
-install -Dm644 /tmp/kidsos-src/branding/themes/plasma/KidsOS.colors /usr/share/color-schemes/KidsOS.colors
+install -Dm644 "${KIDSOS_SRC}/branding/themes/plasma/KidsOS.colors" /usr/share/color-schemes/KidsOS.colors
 
 echo "kidsos: installing the KidsOS SDDM login theme"
 install -d /usr/share/sddm/themes/kidsos
-cp -r /tmp/kidsos-src/branding/sddm-theme/kidsos/. /usr/share/sddm/themes/kidsos/
+cp -r "${KIDSOS_SRC}/branding/sddm-theme/kidsos/." /usr/share/sddm/themes/kidsos/
 
 echo "kidsos: provisioning system users (see docs/SECURITY_ARCHITECTURE.md)"
 # kidsos-setup: runs the one-time first-boot account-creation wizard.
@@ -88,7 +94,7 @@ install -d /etc/fapolicyd/trust.d
 fagenrules --load || \
     echo "kidsos: WARNING — fagenrules failed; verify fapolicyd is installed correctly" >&2
 
-echo "kidsos: cleaning up build toolchain and staged source"
+echo "kidsos: cleaning up build toolchain"
 dnf5 remove -y \
     cmake \
     gcc-c++ \
@@ -98,4 +104,7 @@ dnf5 remove -y \
     qt6-qtdeclarative-devel \
     qt6-qtquickcontrols2-devel \
     qt6-qtsvg-devel
-rm -rf /tmp/kidsos-src /tmp/kidsos-build
+# Not removing $KIDSOS_SRC (/tmp/files): it's a read-only bind mount for
+# this RUN step only (BlueBuild's script module), not part of the image
+# layer regardless — only our own writable scratch dir needs cleanup.
+rm -rf /tmp/kidsos-build

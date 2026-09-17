@@ -13,8 +13,8 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 BRAND_HEXES = ["#FF5A5F", "#FFB400", "#00C2A8", "#3D8BFD"]
-ALLOWED_DIRS = ["branding"]
-ALLOWED_FILES = ["branding/themes/qml/Theme.qml"]
+ALLOWED_DIRS = ["files/branding"]
+ALLOWED_FILES = ["files/branding/themes/qml/Theme.qml"]
 SCAN_EXTENSIONS = {".qml", ".cpp", ".h"}
 
 
