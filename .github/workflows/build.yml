@@ -25,4 +25,8 @@ jobs:
       - name: Build custom image and ISO
         uses: blue-build/github-action@v1
         with:
-          recipe_file: recipes/recipe.yml
+          recipe: recipe.yml
+          push: true
+          registry_username: ${{ github.actor }}
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
+          generate_iso: true
