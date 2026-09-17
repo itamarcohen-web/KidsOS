@@ -20,11 +20,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build custom image and ISO
+      - name: Build custom image
         uses: blue-build/github-action@v1
         with:
           recipe: recipes/recipe.yml
           push: true
           registry_username: ${{ github.actor }}
           registry_token: ${{ secrets.GITHUB_TOKEN }}
+          maximize_build_space: true
           cli_args: "--no-sign"
