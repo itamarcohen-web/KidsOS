@@ -20,7 +20,12 @@ jobs:
       - name: Build and push KidsOS image
         uses: blue-build/github-action@v1
         with:
-          recipe: recipes/recipe.yml
+          # Just the filename: the action itself looks for it under
+          # ./recipes/ (or ./config/) — passing "recipes/recipe.yml" here
+          # doubled the path to "./recipes/recipes/recipe.yml", which is
+          # what actually failed every previous run once the signing
+          # input-name bug (fixed above) stopped masking it.
+          recipe: recipe.yml
           push: true
           registry_username: ${{ github.actor }}
           registry_token: ${{ github.token }}
