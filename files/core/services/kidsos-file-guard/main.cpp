@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include <QDBusConnection>
+#include <QDBusError>
 #include <QDebug>
 
 #include "FileGuardService.h"

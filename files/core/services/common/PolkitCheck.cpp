@@ -2,6 +2,8 @@
 
 #include <QDBusArgument>
 #include <QDBusConnection>
+#include <QDBusConnectionInterface>
+#include <QDBusError>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDebug>

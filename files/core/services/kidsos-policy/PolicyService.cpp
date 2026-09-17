@@ -84,7 +84,10 @@ bool PolicyService::SetSettingManaged(const QString &settingId, bool managed,
         file.close();
     }
     QJsonArray settings = root.value(QStringLiteral("managedSettings")).toArray();
-    settings.removeAll(QJsonValue(settingId));
+    for (int i = settings.size() - 1; i >= 0; --i) {
+        if (settings.at(i) == QJsonValue(settingId))
+            settings.removeAt(i);
+    }
     if (managed)
         settings.append(settingId);
     root[QStringLiteral("managedSettings")] = settings;
