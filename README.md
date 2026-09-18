@@ -1,5 +1,7 @@
 # KidsOS
 
+Created by **Itamar Cohen**.
+
 A colorful, friendly operating system for kids and teens (ages ~8–16),
 built on **Fedora Kinoite**, **KDE Plasma**, **BlueBuild** and
 **Flatpak**. Milestone 1 built the OS foundation (onboarding, branding,
