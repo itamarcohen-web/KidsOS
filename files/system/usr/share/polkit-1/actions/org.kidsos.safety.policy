@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>KidsOS</vendor>
+
+  <action id="org.kidsos.safety.review">
+    <description>Review KidsOS safety events</description>
+    <description xml:lang="he">סקירת אירועי הבטיחות של KidsOS</description>
+    <description xml:lang="ar">مراجعة أحداث السلامة في KidsOS</description>
+    <message>A parent password is required to review safety events</message>
+    <message xml:lang="he">נדרשת סיסמת הורה כדי לסקור אירועי בטיחות</message>
+    <message xml:lang="ar">مطلوبة كلمة مرور الوالد لمراجعة أحداث السلامة</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.kidsos.safety.manage">
+    <description>Change KidsOS safety AI thresholds</description>
+    <description xml:lang="he">שינוי רגישות מנוע הבטיחות של KidsOS</description>
+    <description xml:lang="ar">تغيير حساسية محرك السلامة في KidsOS</description>
+    <message>A parent password is required to change safety AI settings</message>
+    <message xml:lang="he">נדרשת סיסמת הורה כדי לשנות הגדרות בטיחות אלה</message>
+    <message xml:lang="ar">مطلوبة كلمة مرور الوالد لتغيير إعدادات السلامة هذه</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+  </action>
+</policyconfig>

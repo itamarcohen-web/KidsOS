@@ -105,3 +105,14 @@ QVariantList LauncherBridge::myInstallRequests()
     QDBusReply<QVariantList> reply = installer.call(QStringLiteral("ListRequests"), childId);
     return reply.isValid() ? reply.value() : QVariantList();
 }
+
+QVariantMap LauncherBridge::safetyStatus()
+{
+    QDBusInterface safety(QStringLiteral("org.kidsos.Safety1"), QStringLiteral("/org/kidsos/Safety1"),
+                           QStringLiteral("org.kidsos.Safety1"), QDBusConnection::systemBus());
+    if (!safety.isValid())
+        return { { QStringLiteral("protectionActive"), false } };
+
+    QDBusReply<QVariantMap> reply = safety.call(QStringLiteral("GetStatus"));
+    return reply.isValid() ? reply.value() : QVariantMap { { QStringLiteral("protectionActive"), false } };
+}

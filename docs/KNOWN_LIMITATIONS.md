@@ -101,6 +101,50 @@ one is true right now.
 None of this is a substitute for a real security review on a running
 system before this ships to an actual child's computer.
 
+## Milestone 4: the Local Safety AI System's unverified surface
+
+Unlike milestones 1–3, this one benefited from a working GitHub Actions
+CI pipeline (see the build-fix history in this repo's git log) — every
+new `.cpp`/`.h` file actually compiled and linked against real
+Tesseract/ONNX Runtime/Qt6Sql headers before this text was written.
+What CI *can't* verify without a live desktop session:
+
+1. **Whether `org.freedesktop.portal.Screenshot` with
+   `interactive: false` actually avoids a permission dialog for a
+   non-sandboxed, non-interactive automated caller.** This is the
+   single biggest open question in the whole milestone — see
+   `docs/SAFETY_AI.md`'s "What's genuinely verified" section. If
+   portal-kde re-prompts every 120 seconds in practice, that directly
+   violates spec §33's "no popup" requirement and needs a different
+   approach (e.g. a Parent-driven one-time consent flow that captures
+   and persists a `restore_token`).
+2. **`KWinActiveApplicationProvider`'s active-window resolution** loads
+   a KWin script via D-Bus and reads its `print()` output back from the
+   systemd journal (`sd_journal_next` polled for up to 300ms) — a
+   real, working pattern in principle, but genuinely fragile and
+   untested against an actual KWin instance. `X11ActiveApplicationProvider`
+   (plain `XGetInputFocus`/`XGetClassHint`) is far more likely to work
+   as written.
+3. **The 120-second `SafetyScheduler`** uses `CLOCK_MONOTONIC` directly
+   specifically so a suspend/resume cycle doesn't produce a burst of
+   catch-up samples (spec §43) — the logic is straightforward but has
+   only been reasoned through, not run across a real suspend.
+4. **CPU/RAM impact** while a game/video/browser is in the foreground
+   (spec §32) hasn't been measured — `Nice=15`/`IOSchedulingClass=idle`
+   on the systemd unit is the mitigation, not a measurement.
+5. **The "Local AI Models" dev diagnostic screen** (Settings →
+   Local AI Models, Parent-only) currently shows **static** text, not a
+   live D-Bus query of what's actually loaded — accurate for this
+   milestone's actual shipped state (no vision model bundled) but it
+   will not update on its own if a model is installed later without a
+   corresponding code change to query `kidsos-safety-agent`'s real
+   state.
+6. **No vision-safety model ships** — see `docs/SAFETY_AI.md` for why,
+   and `THIRD_PARTY_NOTICES.md` for the one candidate-model note
+   already on record. `OnnxVisionEngine`'s preprocessing contract
+   (224×224 NCHW float32) is documented but untested against any real
+   model file.
+
 ## What *was* validated here
 
 - `tests/validate_recipe.py`, `tests/validate_locales.py` (180 keys,
@@ -116,6 +160,15 @@ system before this ships to an actual child's computer.
   `PolkitCheck::isAuthorized()` call sites, systemd `BusName=` matching
   each service's `registerService()` call, file paths agreeing between
   `docs/SECURITY_ARCHITECTURE.md` and the actual code).
+- Milestone 4 additionally: `tests/validate_safety_model_manifests.py`
+  (every `model.json` well-formed, hashes correct, nothing claims
+  `APPROVED_FOR_DISTRIBUTION` without an actual model file present),
+  `tests/validate_text_safety_rules.py` (the real Stage-1 rule table
+  classifies all 11 spec §41 synthetic scenarios correctly),
+  `tests/validate_mock_vision_fixtures.py` (the hashes hardcoded in
+  `MockVisionEngine.cpp` still match the actual fixture files) — and
+  the GitHub Actions build actually compiling every new file, unlike
+  milestones 1–3.
 
 ## Deliberately scoped-down decisions (all milestones)
 

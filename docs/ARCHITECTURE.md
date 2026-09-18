@@ -7,10 +7,13 @@
 │ KidsOS apps (Qt6 + QML)                                       │
 │  onboarding · launcher · settings · files · approvals ·       │
 │  parent-indicator · file-guard-prompt                         │
+│  + kidsos-safety-agent (Qt6, headless, Child session only)     │
+│    — see docs/SAFETY_AI.md                                    │
 ├──────────────────────────────────────────────────────────────┤
 │ KidsOS services (Qt6 + QtDBus, root/system D-Bus)              │
 │  kidsos-auth · kidsos-policy · kidsos-installer ·               │
-│  kidsos-file-guard  — see docs/SECURITY_ARCHITECTURE.md         │
+│  kidsos-file-guard · kidsos-safety                              │
+│  — see docs/SECURITY_ARCHITECTURE.md and docs/SAFETY_AI.md      │
 ├──────────────────────────────────────────────────────────────┤
 │ Shared runtime  (apps/common, branding/themes, core/…)          │
 │  KidsOS.Theme · KidsOS.Localization · KidsOS.Common              │
@@ -97,7 +100,10 @@ work slots in without touching this foundation — see
 - Kids Store — one demo app (Minecraft) exercises the real
   `InstallRequest` backend; no real catalog yet.
 - Parent Cloud pairing — `ParentConnect.qml` mocks the pairing UX only.
-- Screen Time / Safety AI / Web Protection / advanced App Approval
-  policy UI / Device Management — Settings placeholder categories
-  establish the pattern; `kidsos-policy`'s `appPolicies`/
-  `managedSettings` schema is the natural backend for them.
+- Screen Time / Web Protection / advanced App Approval policy UI /
+  Device Management — Settings placeholder categories establish the
+  pattern; `kidsos-policy`'s `appPolicies`/`managedSettings` schema is
+  the natural backend for them.
+- Safety AI: now implemented as of Milestone 4 (`kidsos-safety-agent` +
+  `kidsos-safety` — see `docs/SAFETY_AI.md`), except Web Protection
+  (URL/content filtering) specifically, which remains a placeholder.

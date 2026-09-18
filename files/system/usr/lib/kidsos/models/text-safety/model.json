@@ -1,0 +1,18 @@
+{
+    "name": "text-safety",
+    "version": "0.1",
+    "file": "rules-0.1.json",
+    "sha256": "0f4e5d92525358216816fbbf84529a1c065086da77b1569d6db2692d0e0d234a",
+    "license": "KidsOS project (own work, no third-party training data)",
+    "source": "Hand-authored keyword/pattern table, not a trained model",
+    "supportedCategories": [
+        "PERSONAL_INFORMATION_REQUEST", "SECRECY_REQUEST", "SEXTORTION_INDICATORS",
+        "SEXUAL_CONTENT", "CYBERBULLYING", "SELF_HARM", "VIOLENCE", "SCAM",
+        "PHISHING", "DANGEROUS_CHALLENGE"
+    ],
+    "modelSizeBytes": 0,
+    "runtime": "none (regex/keyword matching, no inference runtime)",
+    "minimumHardware": "any",
+    "provenanceNotes": "Stage-1 gate only (spec §7/§54) — intentionally simple so it's cheap to run on every 120-second sample; escalation to Stage-2 vision and the Context/Risk engines is what turns a match into an actual SafetyEvent.",
+    "approvalStatus": "APPROVED_FOR_DISTRIBUTION"
+}

@@ -41,6 +41,12 @@ public:
                                               const QStringList &permissions);
     Q_INVOKABLE QVariantList myInstallRequests();
 
+    // Local Safety AI status (spec §34) — thin passthrough to
+    // org.kidsos.Safety1.GetStatus(), backing the persistent
+    // "KidsOS Protection: Active" indicator in QuickSettingsPanel.
+    // Never exposes event content, only protectionActive + lastCheckAt.
+    Q_INVOKABLE QVariantMap safetyStatus();
+
 private:
     QVariantMap m_profile;
     QString m_appearanceMode = QStringLiteral("light");

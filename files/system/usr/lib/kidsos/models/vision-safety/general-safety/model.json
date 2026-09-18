@@ -1,0 +1,14 @@
+{
+    "name": "vision-safety-general",
+    "version": "unset",
+    "file": "model.onnx",
+    "sha256": "",
+    "license": "",
+    "source": "Reserved for a future broader-coverage model (bullying-related visual content, dangerous-challenge visual patterns, scam/phishing visual patterns - spec §12). Not wired into OnnxVisionEngine's discovery table yet; add it there alongside a real approval-workflow decision, not before.",
+    "supportedCategories": [],
+    "modelSizeBytes": 0,
+    "runtime": "onnxruntime",
+    "minimumHardware": "unset",
+    "provenanceNotes": "Placeholder directory only, per spec §9's expected models/ layout.",
+    "approvalStatus": "UNREVIEWED"
+}

@@ -1,0 +1,23 @@
+[Unit]
+Description=KidsOS local safety AI screen-sampling agent
+Documentation=man:kidsos-safety-agent(8)
+# Only while a real graphical session exists (spec §5) — systemd/logind
+# starts and stops this unit alongside the session itself, which is
+# also what keeps it from ever running for a bare SSH/TTY login.
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/kidsos-safety-agent
+Restart=on-failure
+RestartSec=5
+# spec §32: never let this compete for foreground resources.
+Nice=15
+IOSchedulingClass=idle
+# The binary itself exits immediately (success) unless the logged-in
+# account is in kidsos-children — see src/main.cpp — so enabling this
+# unit globally for every user is intentional and harmless for Parent
+# sessions.
+
+[Install]
+WantedBy=graphical-session.target

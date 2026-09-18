@@ -8,7 +8,7 @@ only placeholders or stable extension points exist for them:
 | Kids Store real catalog | One demo app ("Minecraft") exercises the real `InstallRequest` flow end to end | `apps/launcher/qml/Main.qml` (`storeDialog`), `kidsos-installer` |
 | Parent Cloud / Parent App pairing | Mocked QR + pairing code, fake "connected" state | `apps/onboarding/qml/screens/ParentConnect.qml` |
 | Screen Time | Not implemented | Settings placeholder category; `kidsos-policy`'s schema is the natural backend |
-| Safety AI / Screen Analysis / Web Protection | Not implemented | — |
+| Safety AI / Screen Analysis / Web Protection | Milestone 4: local OCR + Stage-1 text rule table + pluggable local vision architecture (no vision model bundled — Mock/Development only) ship; a production vision model still needs the license/provenance review in `docs/SAFETY_AI.md` before `approvalStatus` can become `APPROVED_FOR_DISTRIBUTION`. Web Protection specifically (URL/content filtering in Kids Browser) remains unimplemented. | `kidsos-safety-agent`, `kidsos-safety` — see `docs/SAFETY_AI.md` |
 | Advanced App Approval *policy* UI (pre-authorizing categories/apps in advance, vs. reactive approve/deny) | Not implemented — the reactive flow (spec §16) *is* implemented (`kidsos-approvals`) | `kidsos-policy::SetAppPolicy` already exists as the backend hook |
 | External File Approval policy UI | Reactive flow implemented (`kidsos-file-guard-prompt` → `kidsos-approvals`); no *proactive* per-source-URL policy UI yet | `kidsos-policy` |
 | Device Management | Not implemented | — |

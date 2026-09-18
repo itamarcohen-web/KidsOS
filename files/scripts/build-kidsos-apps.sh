@@ -82,6 +82,7 @@ fi
 echo "kidsos: preparing /var/lib/kidsos state directories"
 install -d -m 0755 /var/lib/kidsos/profiles      # world-readable public profile summaries
 install -d -m 0700 /var/lib/kidsos/installer      # kidsos-installer's SQLite store (root-only)
+install -d -m 0750 -o root -g kidsos-service /var/lib/kidsos/safety  # kidsos-safety's SQLite store
 
 echo "kidsos: enabling PAM lockout after repeated failed logins"
 # authselect (not hand-edited PAM files) — see

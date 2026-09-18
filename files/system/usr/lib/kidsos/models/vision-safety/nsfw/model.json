@@ -1,0 +1,14 @@
+{
+    "name": "vision-safety-nsfw",
+    "version": "unset",
+    "file": "model.onnx",
+    "sha256": "",
+    "license": "",
+    "source": "No model installed. Public Hugging Face NSFW-classification models exist (some tagged Apache-2.0), but an Apache-2.0 *code/weights* license does not by itself resolve training-data provenance or commercial-use suitability for a children's product - see THIRD_PARTY_NOTICES.md and docs/SAFETY_AI.md's model-approval workflow. A candidate must go through that review before this manifest is filled in.",
+    "supportedCategories": ["SEXUAL_CONTENT"],
+    "modelSizeBytes": 0,
+    "runtime": "onnxruntime",
+    "minimumHardware": "unset",
+    "provenanceNotes": "Placeholder only - OnnxVisionEngine will not load anything from this directory until a model.onnx is present, its sha256 here matches, and approvalStatus below is APPROVED_FOR_DISTRIBUTION.",
+    "approvalStatus": "UNREVIEWED"
+}

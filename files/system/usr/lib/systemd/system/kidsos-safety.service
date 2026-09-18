@@ -1,0 +1,23 @@
+[Unit]
+Description=KidsOS local safety AI event store (org.kidsos.Safety1)
+Documentation=man:kidsos-safety(8)
+After=dbus.service
+Requires=dbus.service
+
+[Service]
+Type=dbus
+BusName=org.kidsos.Safety1
+ExecStart=/usr/libexec/kidsos/kidsos-safety
+Restart=on-failure
+# Unprivileged on purpose, same as kidsos-policy: this service only
+# ever touches its own database/policy file, or asks polkit before a
+# Parent-only action — see docs/SECURITY_ARCHITECTURE.md and
+# docs/SAFETY_AI.md.
+User=kidsos-service
+Group=kidsos-service
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/etc/kidsos /var/lib/kidsos/safety
+
+[Install]
+WantedBy=multi-user.target

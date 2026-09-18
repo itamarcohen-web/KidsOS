@@ -171,6 +171,22 @@ default handler for executable-ish MIME types — see
 dialog and calls `SubmitExternalInstallRequest` — but it is **not**
 what blocks execution; fapolicyd already has.
 
+### `kidsos-safety` — `org.kidsos.Safety1` (`/org/kidsos/Safety1`)
+
+The privileged half of the Local Safety AI System (Milestone 4) — full
+pipeline description in `docs/SAFETY_AI.md`. Runs unprivileged as
+`kidsos-service`, same as `kidsos-policy`. Owns
+`/var/lib/kidsos/safety/events.db` and `/etc/kidsos/safety-policy.json`;
+`kidsos-safety-agent` (which runs *inside the Child's own session*,
+since XDG portal screen capture has to be requested from there) never
+touches either file directly — only `ReportEvent`/`Heartbeat` over
+D-Bus. `ReportEvent` additionally rejects any caller whose uid is in
+`wheel` (i.e. a Parent session can't be mistaken for, or inject events
+as, the Child), on top of the system D-Bus policy restricting the bus
+name. `GetRecentEvents`/`SetThreshold` are polkit-gated
+(`org.kidsos.safety.review` / `org.kidsos.safety.manage`,
+`auth_admin`) exactly like `kidsos-policy`'s Parent-only calls.
+
 ## Polkit actions
 
 `core/configuration/polkit/actions/org.kidsos.*.policy` (installed to

@@ -40,9 +40,11 @@ add_subdirectory(apps/files)
 add_subdirectory(apps/approvals)
 add_subdirectory(apps/parent-indicator)
 add_subdirectory(apps/file-guard-prompt)
+add_subdirectory(apps/safety-agent)
 
 # ---- Privileged D-Bus services (see docs/SECURITY_ARCHITECTURE.md) ----
 add_subdirectory(core/services/kidsos-auth)
 add_subdirectory(core/services/kidsos-policy)
 add_subdirectory(core/services/kidsos-installer)
 add_subdirectory(core/services/kidsos-file-guard)
+add_subdirectory(core/services/kidsos-safety)

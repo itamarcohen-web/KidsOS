@@ -179,7 +179,24 @@
     "bluetooth": "בלוטות'",
     "darkMode": "מצב כהה",
     "nightLight": "אור לילה",
-    "volume": "עוצמת קול"
+    "volume": "עוצמת קול",
+    "safetyProtection": "הגנת KidsOS: פעילה"
+  },
+  "safety": {
+    "statusTitle": "הגנת הבטיחות פעילה.",
+    "lastCheck": "בדיקת בטיחות אחרונה: {0}",
+    "lastCheckUnknown": "בדיקת בטיחות אחרונה: טרם בוצעה",
+    "protectionActiveDescription": "הגנת הבטיחות פעילה.",
+    "devScreenTitle": "מודלי בינה מלאכותית מקומיים",
+    "ocrLabel": "זיהוי טקסט (OCR)",
+    "textEngineLabel": "בטיחות טקסט",
+    "visionEngineLabel": "מנוע ראייה",
+    "internetDependencyLabel": "תלות באינטרנט",
+    "internetDependencyNone": "אין",
+    "statusAvailable": "זמין",
+    "statusNotInstalled": "לא מותקן",
+    "statusMockDevelopment": "הדמיה / פיתוח",
+    "statusNotAvailable": "לא זמין"
   },
   "files": {
     "title": "קבצי קידס",
@@ -209,7 +226,8 @@
       "storage": "אחסון",
       "apps": "אפליקציות",
       "accessibility": "נגישות",
-      "about": "אודות KidsOS"
+      "about": "אודות KidsOS",
+      "localAiModels": "מודלי בינה מלאכותית מקומיים"
     },
     "appearance": {
       "title": "מראה",

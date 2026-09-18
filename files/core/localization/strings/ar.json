@@ -179,7 +179,24 @@
     "bluetooth": "بلوتوث",
     "darkMode": "الوضع الداكن",
     "nightLight": "الإضاءة الليلية",
-    "volume": "مستوى الصوت"
+    "volume": "مستوى الصوت",
+    "safetyProtection": "حماية KidsOS: مفعّلة"
+  },
+  "safety": {
+    "statusTitle": "حماية الأمان مفعّلة.",
+    "lastCheck": "آخر فحص أمان: {0}",
+    "lastCheckUnknown": "آخر فحص أمان: لم يُجرَ بعد",
+    "protectionActiveDescription": "حماية الأمان مفعّلة.",
+    "devScreenTitle": "نماذج الذكاء الاصطناعي المحلية",
+    "ocrLabel": "التعرّف الضوئي على النصوص",
+    "textEngineLabel": "أمان النصوص",
+    "visionEngineLabel": "محرك الرؤية",
+    "internetDependencyLabel": "الاعتماد على الإنترنت",
+    "internetDependencyNone": "لا يوجد",
+    "statusAvailable": "متاح",
+    "statusNotInstalled": "غير مثبّت",
+    "statusMockDevelopment": "محاكاة / تطوير",
+    "statusNotAvailable": "غير متاح"
   },
   "files": {
     "title": "ملفات Kids",
@@ -209,7 +226,8 @@
       "storage": "التخزين",
       "apps": "التطبيقات",
       "accessibility": "إمكانية الوصول",
-      "about": "حول KidsOS"
+      "about": "حول KidsOS",
+      "localAiModels": "نماذج الذكاء الاصطناعي المحلية"
     },
     "appearance": {
       "title": "المظهر",

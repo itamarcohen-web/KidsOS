@@ -41,7 +41,7 @@ Window {
         { id: "apps", glyph: "\u{1F4E6}" },
         { id: "accessibility", glyph: "♿" },
         { id: "about", glyph: "ℹ" }
-    ]
+    ].concat(Bridge.isChildAccount ? [] : [{ id: "localAiModels", glyph: "\u{1F6E1}" }])
     property string activeCategory: "appearance"
 
     RowLayout {
@@ -119,6 +119,7 @@ Window {
                     if (window.activeCategory === "language") return languageComponent
                     if (window.activeCategory === "about") return aboutComponent
                     if (window.activeCategory === "accessibility") return accessibilityComponent
+                    if (window.activeCategory === "localAiModels") return localAiModelsComponent
                     return placeholderComponent
                 }
             }
@@ -129,6 +130,7 @@ Window {
     Component { id: languageComponent; LanguageCategory {} }
     Component { id: aboutComponent; AboutCategory {} }
     Component { id: accessibilityComponent; AccessibilityCategory {} }
+    Component { id: localAiModelsComponent; LocalAiModelsCategory {} }
     Component {
         id: placeholderComponent
         PlaceholderCategory {

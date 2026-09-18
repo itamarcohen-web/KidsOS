@@ -57,6 +57,17 @@ modules:
       - google-noto-sans-arabic-fonts
       - google-noto-emoji-fonts
       - google-noto-color-emoji-fonts
+      # ---- Local Safety AI System (Milestone 4) — see docs/SAFETY_AI.md.
+      #      All local/offline: no package here talks to a network AI
+      #      service.
+      - tesseract # local OCR engine — spec §10
+      - tesseract-devel # TessBaseAPI headers for kidsos-safety-agent
+      - tesseract-langpack-heb
+      - tesseract-langpack-ara
+      # tesseract-langpack-eng comes free: tesseract Requires it.
+      - leptonica-devel # tesseract's image-processing dependency
+      - onnxruntime # local inference runtime — spec §8/§36
+      - onnxruntime-devel
 
   # ---- Browser + Music (via Flatpak): Elisa isn't packaged as an RPM
   #      past Fedora 29 in Fedora's repos, so Kids Music ships as the
@@ -82,6 +93,16 @@ modules:
         - kidsos-policy.service
         - kidsos-file-guard.service
         - kidsos-installer.service
+        - kidsos-safety.service
+    # kidsos-safety-agent runs per-session (not system-wide) because
+    # XDG portal screen capture must be requested from inside the
+    # session being captured — see docs/SAFETY_AI.md. `--global`
+    # enablement (spec of this module's `user:` block) means every
+    # user gets it started by logind's graphical-session.target; the
+    # binary itself exits immediately for a Parent session.
+    user:
+      enabled:
+        - kidsos-safety-agent.service
 
   # ---- Sign the resulting image (see docs/BUILD.md for cosign setup) ----
   - type: signing

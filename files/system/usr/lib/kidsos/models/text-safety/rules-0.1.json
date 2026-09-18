@@ -1,0 +1,87 @@
+{
+    "version": "safety-text-0.1",
+    "description": "Versioned keyword/pattern scorer for Stage-1 OCR text classification (spec §7/§11/§54). A rule-based table, not a trained model — see /usr/lib/kidsos/models/text-safety/model.json and docs/SAFETY_AI.md for why.",
+    "rules": [
+        {
+            "category": "PERSONAL_INFORMATION_REQUEST",
+            "weight": 0.45,
+            "patterns": [
+                "how old are you", "what'?s your age", "where do you live",
+                "what'?s your address", "what school do you go to",
+                "what'?s your (real )?name", "send (me )?your (phone )?number",
+                "what city are you in"
+            ]
+        },
+        {
+            "category": "SECRECY_REQUEST",
+            "weight": 0.55,
+            "patterns": [
+                "don'?t tell your (parents|mom|dad|mother|father)",
+                "keep this (a )?secret", "don'?t tell anyone", "just between us",
+                "delete this (conversation|chat|message)( after)?"
+            ]
+        },
+        {
+            "category": "SEXTORTION_INDICATORS",
+            "weight": 0.85,
+            "patterns": [
+                "send (me )?(a )?(pic|picture|photo)s? or", "i have your (photos|pictures)",
+                "i'?ll (send|post|share) (it|this|your photos) to everyone"
+            ]
+        },
+        {
+            "category": "SEXUAL_CONTENT",
+            "weight": 0.6,
+            "patterns": [
+                "send nudes", "take off your clothes", "send (me )?a naked"
+            ]
+        },
+        {
+            "category": "CYBERBULLYING",
+            "weight": 0.4,
+            "patterns": [
+                "nobody likes you", "everyone hates you", "you'?re (so )?(ugly|stupid|worthless|pathetic)",
+                "kill yourself", "go die", "you should just disappear"
+            ]
+        },
+        {
+            "category": "SELF_HARM",
+            "weight": 0.7,
+            "patterns": [
+                "i want to (kill myself|die|hurt myself)", "i'?m going to (kill myself|end it)",
+                "i'?ve been cutting", "no reason to live"
+            ]
+        },
+        {
+            "category": "VIOLENCE",
+            "weight": 0.5,
+            "patterns": [
+                "i'?ll kill you", "i'?m going to hurt you", "i have a (gun|knife) and"
+            ]
+        },
+        {
+            "category": "SCAM",
+            "weight": 0.45,
+            "patterns": [
+                "you'?ve won a (prize|free)", "claim your (reward|prize) now",
+                "free (robux|v-?bucks|gift card)", "act now to claim"
+            ]
+        },
+        {
+            "category": "PHISHING",
+            "weight": 0.5,
+            "patterns": [
+                "verify your account", "your account (will be|has been) suspended",
+                "click (this|the) link to (confirm|verify|login)", "update your payment (info|information)"
+            ]
+        },
+        {
+            "category": "DANGEROUS_CHALLENGE",
+            "weight": 0.6,
+            "patterns": [
+                "blackout challenge", "skull ?breaker challenge", "benadryl challenge",
+                "fire ?spray challenge"
+            ]
+        }
+    ]
+}

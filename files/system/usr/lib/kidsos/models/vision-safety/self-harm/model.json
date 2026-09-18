@@ -1,0 +1,14 @@
+{
+    "name": "vision-safety-self-harm",
+    "version": "unset",
+    "file": "model.onnx",
+    "sha256": "",
+    "license": "",
+    "source": "No model installed. Self-harm imagery detection is explicitly the category this project will NOT fake with keyword/heuristic stand-ins (see docs/SAFETY_AI.md) - OnnxVisionEngine hardcodes NOT_AVAILABLE for this category regardless of what is placed in this directory, until a vetted model exists and that hardcoded exclusion is deliberately removed in code review.",
+    "supportedCategories": ["SELF_HARM"],
+    "modelSizeBytes": 0,
+    "runtime": "onnxruntime",
+    "minimumHardware": "unset",
+    "provenanceNotes": "Intentionally the least-ready category in this milestone. Do not populate this manifest without a specific, explicit decision to do so - see the ModelApprovalStatus workflow in docs/SAFETY_AI.md.",
+    "approvalStatus": "UNREVIEWED"
+}

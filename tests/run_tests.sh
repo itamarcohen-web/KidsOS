@@ -25,4 +25,16 @@ echo "== trust model invariants =="
 python3 tests/validate_trust_model_invariants.py
 
 echo
+echo "== safety AI model manifests =="
+python3 tests/validate_safety_model_manifests.py
+
+echo
+echo "== safety AI text classifier rules =="
+python3 tests/validate_text_safety_rules.py
+
+echo
+echo "== mock vision engine fixtures =="
+python3 tests/validate_mock_vision_fixtures.py
+
+echo
 echo "All static checks passed."

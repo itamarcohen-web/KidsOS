@@ -1,0 +1,16 @@
+{
+    "description": "Synthetic text fixtures for the 11 scenarios in spec §41. All content is invented for testing — no real conversations. Each entry's expectedCategory is what RuleBasedTextClassifier's Stage-1 rule table (rules-0.1.json) should match on the raw text alone, before any Context Engine adjustment.",
+    "fixtures": [
+        { "file": "01_normal_desktop.txt", "expectedCategory": "UNKNOWN" },
+        { "file": "02_school_website.txt", "expectedCategory": "UNKNOWN" },
+        { "file": "03_normal_game_chat.txt", "expectedCategory": "UNKNOWN" },
+        { "file": "04_cyberbullying.txt", "expectedCategory": "CYBERBULLYING" },
+        { "file": "05_personal_information_request.txt", "expectedCategory": "PERSONAL_INFORMATION_REQUEST" },
+        { "file": "06_secrecy_request.txt", "expectedCategory": "SECRECY_REQUEST" },
+        { "file": "07_potential_grooming_pattern.txt", "expectedCategory": "SECRECY_REQUEST" },
+        { "file": "08_scam_like_message.txt", "expectedCategory": "SCAM" },
+        { "file": "09_phishing_page.txt", "expectedCategory": "PHISHING" },
+        { "file": "10_adult_oriented_content_indicator.txt", "expectedCategory": "SEXUAL_CONTENT" },
+        { "file": "11_violent_content_indicator.txt", "expectedCategory": "VIOLENCE" }
+    ]
+}

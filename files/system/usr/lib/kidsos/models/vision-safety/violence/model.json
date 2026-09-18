@@ -1,0 +1,14 @@
+{
+    "name": "vision-safety-violence",
+    "version": "unset",
+    "file": "model.onnx",
+    "sha256": "",
+    "license": "",
+    "source": "No model installed - see docs/SAFETY_AI.md's model-approval workflow (candidate -> license review -> dataset/provenance review -> technical benchmark -> false-positive benchmark -> performance benchmark -> commercial suitability review -> approved/rejected). Note spec's explicit caution: fictional/game violence must not be treated as equivalent to real-world violent imagery - that distinction is the Context Engine's job, not this model's.",
+    "supportedCategories": ["VIOLENCE"],
+    "modelSizeBytes": 0,
+    "runtime": "onnxruntime",
+    "minimumHardware": "unset",
+    "provenanceNotes": "Placeholder only - see nsfw/model.json for why nothing loads from an UNREVIEWED manifest.",
+    "approvalStatus": "UNREVIEWED"
+}

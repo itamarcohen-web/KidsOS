@@ -179,7 +179,24 @@
     "bluetooth": "Bluetooth",
     "darkMode": "Dark Mode",
     "nightLight": "Night Light",
-    "volume": "Volume"
+    "volume": "Volume",
+    "safetyProtection": "KidsOS Protection: Active"
+  },
+  "safety": {
+    "statusTitle": "Safety monitoring is active.",
+    "lastCheck": "Last safety check: {0}",
+    "lastCheckUnknown": "Last safety check: not yet run",
+    "protectionActiveDescription": "Safety protection is active.",
+    "devScreenTitle": "Local AI Models",
+    "ocrLabel": "OCR",
+    "textEngineLabel": "Text Safety",
+    "visionEngineLabel": "Vision Engine",
+    "internetDependencyLabel": "Internet dependency",
+    "internetDependencyNone": "None",
+    "statusAvailable": "Available",
+    "statusNotInstalled": "Not installed",
+    "statusMockDevelopment": "Mock / Development",
+    "statusNotAvailable": "Not available"
   },
   "files": {
     "title": "Kids Files",
@@ -209,7 +226,8 @@
       "storage": "Storage",
       "apps": "Apps",
       "accessibility": "Accessibility",
-      "about": "About KidsOS"
+      "about": "About KidsOS",
+      "localAiModels": "Local AI Models"
     },
     "appearance": {
       "title": "Appearance",
