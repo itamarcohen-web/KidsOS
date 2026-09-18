@@ -1,6 +1,7 @@
 #include "X11Capture.h"
 
 #include <QGuiApplication>
+#include <QPixmap>
 #include <QScreen>
 
 QImage X11Capture::captureActiveScreen()
