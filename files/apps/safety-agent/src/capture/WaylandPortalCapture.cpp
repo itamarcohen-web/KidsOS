@@ -10,7 +10,6 @@
 #include <QFile>
 #include <QTimer>
 #include <QUrl>
-#include <QVariantMap>
 
 namespace {
 constexpr int kPortalTimeoutMs = 5000;
@@ -40,37 +39,47 @@ QImage WaylandPortalCapture::captureActiveScreen()
         return {};
     }
 
-    QString resultUri;
-    bool gotResponse = false;
+    m_gotResponse = false;
+    m_resultUri.clear();
 
-    QEventLoop loop;
-    QTimer timeoutTimer;
-    timeoutTimer.setSingleShot(true);
-    QObject::connect(&timeoutTimer, &QTimer::timeout, &loop, &QEventLoop::quit);
-
+    // QDBusConnection::connect() needs a real QObject slot (no lambda
+    // support) — see WaylandPortalCapture.h.
     const bool connected = bus.connect(
         QString(), reply.value().path(), QStringLiteral("org.freedesktop.portal.Request"),
-        QStringLiteral("Response"),
-        &loop, [&](uint response, const QVariantMap &results) {
-            gotResponse = true;
-            if (response == 0)
-                resultUri = results.value(QStringLiteral("uri")).toString();
-            loop.quit();
-        });
-
+        QStringLiteral("Response"), this, SLOT(handlePortalResponse(uint, QVariantMap)));
     if (!connected) {
         qWarning() << "kidsos-safety-agent: could not subscribe to portal Request.Response";
         return {};
     }
 
-    timeoutTimer.start(kPortalTimeoutMs);
-    loop.exec();
+    QEventLoop loop;
+    m_loop = &loop;
 
-    if (!gotResponse || resultUri.isEmpty())
+    QTimer timeoutTimer;
+    timeoutTimer.setSingleShot(true);
+    connect(&timeoutTimer, &QTimer::timeout, &loop, &QEventLoop::quit);
+    timeoutTimer.start(kPortalTimeoutMs);
+
+    loop.exec();
+    m_loop = nullptr;
+
+    bus.disconnect(QString(), reply.value().path(), QStringLiteral("org.freedesktop.portal.Request"),
+                    QStringLiteral("Response"), this, SLOT(handlePortalResponse(uint, QVariantMap)));
+
+    if (!m_gotResponse || m_resultUri.isEmpty())
         return {};
 
-    const QString localPath = QUrl(resultUri).toLocalFile();
+    const QString localPath = QUrl(m_resultUri).toLocalFile();
     QImage image(localPath);
     QFile::remove(localPath); // spec §20: never leave a copy on disk
     return image;
+}
+
+void WaylandPortalCapture::handlePortalResponse(uint response, const QVariantMap &results)
+{
+    m_gotResponse = true;
+    if (response == 0)
+        m_resultUri = results.value(QStringLiteral("uri")).toString();
+    if (m_loop)
+        m_loop->quit();
 }
