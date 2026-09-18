@@ -27,6 +27,13 @@ class SafetyAgent
 {
 public:
     SafetyAgent(const QString &childId, const QString &locale);
+    // Declared (not defaulted inline) because m_textClassifier is a
+    // unique_ptr<RuleBasedTextClassifier> and that type is only
+    // forward-declared here — an implicitly-generated destructor would
+    // need it complete at every call site (including main.cpp, which
+    // never includes RuleBasedTextClassifier.h), not just where
+    // SafetyAgent.cpp actually defines it.
+    ~SafetyAgent();
 
     // False if a hard prerequisite (e.g. no capture provider could be
     // constructed for this session type) is missing — the caller

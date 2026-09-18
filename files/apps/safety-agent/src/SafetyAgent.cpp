@@ -30,6 +30,11 @@ SafetyAgent::SafetyAgent(const QString &childId, const QString &locale)
 {
 }
 
+// Defined here (not = default inline in the header) so it's
+// instantiated in this translation unit, where RuleBasedTextClassifier
+// (via "ai/RuleBasedTextClassifier.h" above) is a complete type.
+SafetyAgent::~SafetyAgent() = default;
+
 bool SafetyAgent::initialize()
 {
     const QString sessionType = QProcessEnvironment::systemEnvironment().value(QStringLiteral("XDG_SESSION_TYPE"));
