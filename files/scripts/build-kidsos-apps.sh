@@ -9,6 +9,14 @@
 set -oue pipefail
 
 echo "kidsos: installing Qt6/build toolchain"
+# tesseract-devel/leptonica-devel/onnxruntime-devel are build-time-only
+# headers for kidsos-safety-agent (spec: Milestone 4, see
+# docs/SAFETY_AI.md) — they must be installed here, not left to the
+# later rpm-ostree module, since *this* script module runs first and
+# needs their pkg-config files to configure CMake at all. The
+# corresponding runtime packages (tesseract, tesseract-langpack-*,
+# onnxruntime — no "-devel") are requested separately by
+# recipes/recipe.yml's rpm-ostree module for the final image layer.
 dnf5 install -y \
     cmake \
     gcc-c++ \
@@ -18,7 +26,10 @@ dnf5 install -y \
     qt6-qtbase-devel \
     qt6-qtdeclarative-devel \
     qt6-qtquickcontrols2-devel \
-    qt6-qtsvg-devel
+    qt6-qtsvg-devel \
+    tesseract-devel \
+    leptonica-devel \
+    onnxruntime-devel
 
 echo "kidsos: building KidsOS apps and services"
 # CONFIG_DIRECTORY is set by BlueBuild's script module to the mounted
@@ -104,7 +115,10 @@ dnf5 remove -y \
     qt6-qtbase-devel \
     qt6-qtdeclarative-devel \
     qt6-qtquickcontrols2-devel \
-    qt6-qtsvg-devel
+    qt6-qtsvg-devel \
+    tesseract-devel \
+    leptonica-devel \
+    onnxruntime-devel
 # Not removing $KIDSOS_SRC (/tmp/files): it's a read-only bind mount for
 # this RUN step only (BlueBuild's script module), not part of the image
 # layer regardless — only our own writable scratch dir needs cleanup.
